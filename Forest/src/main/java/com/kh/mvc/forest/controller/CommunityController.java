@@ -1,6 +1,7 @@
 package com.kh.mvc.forest.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -73,37 +74,79 @@ public class CommunityController {
 //	}
 
 	@GetMapping("/communityBoard")
-	public String communityBoard() {
-		return "/community/communityBoard";
+	public ModelAndView communityBoard(ModelAndView model, @RequestParam Map<String, String> param) {
+		int page = 1;
+		if(param.containsKey("page") == true) {
+			try {
+				page = Integer.parseInt(param.get("page"));
+			} catch (Exception e) {}
+		}
+		
+		PageInfo pageInfo = new PageInfo(page, 5, service.getBoardCount(param), 10);
+		List<Board> list = service.getBoardList(pageInfo, param);
+		
+		model.addObject("list", list);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("community/communityBoard");
+		
+		return model;
 	}
-	
-//	@GetMapping("/communityBoard")
-//	public ModelAndView communityBoard(ModelAndView model,
-//			@RequestParam(value="page", required=false,defaultValue="1") int page) {
-//		
-//		PageInfo pageInfo = new PageInfo(page, 5, service.getBoardCount(), 10);
-//		List<Board> list = service.getBoardList(pageInfo);
-//		
-//		model.addObject("list", list);
-//		model.addObject("pageInfo", pageInfo);
-//		model.setViewName("community/communityBoard");
-//		
-//		return model;
-//	}
 
 	@GetMapping("/communityQandA")
-	public String communityQandA() {
-		return "/community/communityQandA";
+	public ModelAndView communityQandA(ModelAndView model, @RequestParam Map<String, String> param) {
+		int page = 1;
+		if(param.containsKey("page") == true) {
+			try {
+				page = Integer.parseInt(param.get("page"));
+			} catch (Exception e) {}
+		}
+		
+		PageInfo pageInfo = new PageInfo(page, 5, service.getBoardCount(param), 10);
+		List<Board> list = service.getBoardList(pageInfo, param);
+		
+		model.addObject("list", list);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("community/communityQandA");
+		
+		return model;
 	}
 
 	@GetMapping("/communityQandAFandA")
-	public String communityQandAFandA() {
-		return "/community/communityQandAFandA";
+	public ModelAndView communityQandAFandA(ModelAndView model, @RequestParam Map<String, String> param) {
+		int page = 1;
+		if(param.containsKey("page") == true) {
+			try {
+				page = Integer.parseInt(param.get("page"));
+			} catch (Exception e) {}
+		}
+		
+		PageInfo pageInfo = new PageInfo(page, 5, service.getBoardCount(param), 10);
+		List<Board> list = service.getBoardList(pageInfo, param);
+		
+		model.addObject("list", list);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("community/communityQandAFandA");
+		
+		return model;
 	}
 
 	@GetMapping("/communityQandANotice")
-	public String communityQandANotice() {
-		return "/community/communityQandANotice";
+	public ModelAndView communityQandANotice(ModelAndView model, @RequestParam Map<String, String> param) {
+		int page = 1;
+		if(param.containsKey("page") == true) {
+			try {
+				page = Integer.parseInt(param.get("page"));
+			} catch (Exception e) {}
+		}
+		
+		PageInfo pageInfo = new PageInfo(page, 5, service.getBoardCount(param), 10);
+		List<Board> list = service.getBoardList(pageInfo, param);
+		
+		model.addObject("list", list);
+		model.addObject("pageInfo", pageInfo);
+		model.setViewName("community/communityQandANotice");
+		
+		return model;
 	}
 
 	@GetMapping("/communityReview")

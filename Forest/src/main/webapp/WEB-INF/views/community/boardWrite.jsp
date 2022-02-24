@@ -47,6 +47,8 @@
 	            <div class="mb-3">
 	              <label class="form-label" for="form_street">제목</label>
 	              <input class="form-control" name="title" id="title"><br>
+	              <label class="form-label" for="form_street">작성자</label>
+	              <input class="form-control" name="writerId" value="${loginMember.id}" readonly><br>
 			        <label class="form-label" for="form_street">글작성</label>
 			        	<textarea class="form-control border border-light-gray mb-4" name="content" id="content" placeholder="글을 작성해주세요" rows="8"
 			        	  maxlength="1000" required></textarea>

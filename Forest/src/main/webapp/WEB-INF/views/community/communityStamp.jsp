@@ -117,21 +117,23 @@
 
   <section class="container py-5 ">
     <table class="table text-gray-700 table-striped table-hover">
+     <form action="${path}/community/communityStamp" method="get">
       <div class="col-xl-5 mb-4" style="float: right;">
         <div class="input-group">
-          <input class="form-control" type="text" placeholder="사용자 ID를 입력해주세요." id="form_search">
+          <input class="form-control" type="text" name="id" placeholder="사용자 ID를 입력해주세요." id="form_search">
           <button class="btn btn-primary" style="float: right;" type="submit">검색</button>
         </div>
       </div>
+     </form>
       <tr>
         <th class="py-4 text-center align-middle">순위</th>
         <th class="py-4 text-center align-middle">사용자ID</th>
         <th class="py-4 text-center align-middle">스탬프 수</th>
       </tr>
       <tr>
-        <td class="py-4 text-center align-middle">6위</td>
-        <td class="py-4 text-center align-middle">kimsuhwan</td>
-        <td class="py-4 text-center align-middle">26개</td>
+        <td class="py-4 text-center align-middle">6위</td> <!-- Rank -->
+        <td class="py-4 text-center align-middle"><c:out value="${stamp.id}"/></td> <!-- 사용자 ID -->
+        <td class="py-4 text-center align-middle"><c:out value="${stamp.id}"/></td> <!-- 스탬프 수 -->
       </tr>
       <tr>
         <td class="py-4 text-center align-middle">7위</td>
@@ -194,50 +196,6 @@
   </section>
    <!-- 푸터 -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-  <!-- JavaScript files-->
-  <script>
-    // ------------------------------------------------------- //
-    //   Inject SVG Sprite - 
-    //   see more here 
-    //   https://css-tricks.com/ajaxing-svg-sprite/
-    // ------------------------------------------------------ //
-    function injectSvgSprite(path) {
-
-      var ajax = new XMLHttpRequest();
-      ajax.open("GET ", path, true);
-      ajax.send();
-      ajax.onload = function (e) {
-        var div = document.createElement("div ");
-        div.className = 'd-none';
-        div.innerHTML = ajax.responseText;
-        document.body.insertBefore(div, document.body.childNodes[0]);
-      }
-    }
-    // to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-    // use your own URL in production, please :)
-    // https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-    //- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
-    injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
-  </script>
-  <!-- jQuery-->
-  <script src="vendor/jquery/jquery.min.js "></script>
-  <!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
-  <!-- Magnific Popup - Lightbox for the gallery-->
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js "></script>
-  <!-- Smooth scroll-->
-  <script src="vendor/smooth-scroll/smooth-scroll.polyfills.min.js "></script>
-  <!-- Bootstrap Select-->
-  <script src="vendor/bootstrap-select/js/bootstrap-select.min.js "></script>
-  <!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-  <script src="vendor/object-fit-images/ofi.min.js "></script>
-  <!-- Swiper Carousel                       -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js "></script>
-  <script>
-    var basePath = ''
-  </script>
-  <!-- Main Theme JS file    -->
-  <script src="js/theme.js "></script>
 </body>
 
 </html>

@@ -162,22 +162,6 @@
   </section>
   <!-- 푸터 -->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-  <!-- Map-->
-  <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-    crossorigin=""></script>
-  <!-- Available tile layers-->
-  <script src="${path }/resources/js/map-layers.js"></script>
-  <script src="${path }/resources/js/map-detail.js"></script>
-  <script>
-    createDetailMap({
-      mapId: 'detailMap',
-      mapCenter: [40.732346, -74.0014247],
-      markerShow: true,
-      markerPosition: [40.732346, -74.0014247],
-      markerPath: '<%=request.getContextPath() %>/resources/img/marker.svg',
-    })
-  </script>
 </body>
 
 </html>
