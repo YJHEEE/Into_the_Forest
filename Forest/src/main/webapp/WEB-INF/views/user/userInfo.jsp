@@ -22,8 +22,10 @@
           <!-- 사이드 -->
           <div class="col-lg-3 me-lg-auto">
             <div class="card border-0 shadow mb-6 mb-lg-0 sticky-top" style="top: 5rem;">
-              <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block" href="#"><img class="d-block avatar avatar-xxl p-2 mb-2" src="${path }/resources/img/user.png" alt=""></a>
-                <h5>우보</h5>
+              <div class="card-header bg-gray-100 mb-2 py-4 border-0 text-center">
+                <a class="d-inline-block" href="${path}/user/user">
+              	  <img class="d-inline-block avatar avatar-xxl p-2 mb-2" src="${path }/resources/img/user.png"></a>
+                <h5>${loginMember.name} 님</h5>
             </div>
             <div class="card-body p-4">
               <div class="d-flex align-items-center mb-3">
@@ -33,7 +35,7 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="mb-0">스탬프 2</p>
+                  <p class="mb-0">스탬프<span style="float: right;">2</span></p>
                 </div>
               </div>
               <hr>
@@ -45,7 +47,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">내정보</p>
+                    <p class="mb-0">내 정보</p>
                   </div>
                 </div>
               </a>
@@ -69,7 +71,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">예약정보</p>
+                    <p class="mb-0">예약 정보</p>
                   </div>
                 </div>
               </a>
@@ -81,76 +83,73 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">내가쓴글</p>
+                    <p class="mb-0">내가 쓴 글</p>
                   </div>
                 </div>
               </a>
             </div>
           </div>
-          </div>
+        </div>
         <!-- 메인 -->
         <div class="col-lg-9 ps-lg-5">
           <div class="text-block mb-5 border-0">
-            <!-- <h3 class="mb-5">내정보</h3> -->
-            <h5 class="mb-3">개인정보</h5>
-            <p class="text-sm text-muted"><i class="fa fa-id-card fa-fw me-2"></i>이진<br><i
-                class="fa fa-birthday-cake fa-fw me-2"></i>1990/00/00<br><i
-                class="fa fa-envelope-open fa-fw me-2"></i>john.doe@directory.com <span class="mx-2"> | </span> <i
-                class="fa fa-phone fa-fw me-2"></i>+82)010-1234-5678</p>
-            <form action="#">
-              <div class="row pt-5">
-                <h5>개인정보 변경</h5>
+	        <ol class="breadcrumb ps-0  justify-content-start">
+	          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+	          <li class="breadcrumb-item"><a href="user-account.html">My Page</a></li>
+	          <li class="breadcrumb-item active">내 정보 수정</li>
+	        </ol>
+	        <h1 class="hero-heading m-1 mb-2">내 정보 수정</h1>
+	        <p class="text-muted mb-3">내 정보를 최신 정보로 관리해 주세요.</p>          
+           <form action="${path}/user/userInfo" method="POST">
+              <div class="row pt-3">
                 <div class="mb-4 col-md-6">
                   <label class="form-label" for="name">이름</label>
-                  <input class="form-control" type="text" name="name" id="name" value="이진">
+                  <input class="form-control" type="text" name="name" id="name" value="${loginMember.name}" readonly="readonly">
                 </div>
                 <div class="mb-4 col-md-6">
-                  <label class="form-label" for="date">번호</label>
-                  <input class="form-control" type="text" name="date" id="date" value="010-1234-5678">
+                  <label class="form-label" for="phone">번호</label>
+                  <input class="form-control" type="text" name="phone" id="phone" value="${loginMember.phone}">
                 </div>
+                <div class="mb-4 col-md-6">
+                  <label class="form-label" for="pass1">새로운 비밀번호</label>
+                  <input class="form-control" type="password" name="pass1" id="pass1">
+                </div>
+                <div class="mb-4 col-md-6">
+                  <label class="form-label" for="pass2">비밀번호 확인</label>
+                  <input class="form-control" type="password" name="pass2" id="pass2">
+                </div>
+                <div class="mb-0 mt-1 col-md-6">
+                	<label class="form-label mb-1" for="file">첨부파일</label><br>
+                	<input type="file" name="upfile">
+			    </div>
               </div>
+             <button class="btn btn-primary my-4 pe-2 float-end" type="submit" id="updateSubmit"onclick="return validate();">개인정보 변경</button>
             </form>
-            <div class="mb-1">
-              <form class="dropzone" id="demo-upload" action="/upload">
-                <div class="dz-message text-muted">
-                  <p>클릭하여 파일을 불러오세요.</p>
-                  <p><span class="note">나만의 프로필 사진으로 변경할 수 있습니다.</span></p>
-                </div>
-              </form>
-            </div>
-            <button class="btn btn-primary my-4 pe-2 float-end" type="submit">개인정보 변경</button>
           </div>
-          <div class="text-block">
-            <div class="row">
-              <div class="col-sm-8">
-                <h5>비밀번호 변경</h5>
-                <p class="text-sm text-muted">마지막 업데이트는 3개월 전 입니다.</p>
-              </div>
-            </div>
-            <form action="#">
-              <div class="row pt-3">
-                <div class="col-12">
-                  <label class="form-label" for="password-current">현재 비밀번호</label>
-                  <input class="form-control" type="password" name="password-current" id="password-current">
-                </div>
-                <div class="mb-4 col-md-6">
-                  <label class="form-label" for="password-new">새로운 비밀번호</label>
-                  <input class="form-control" type="password" name="password-new" id="password-new">
-                </div>
-                <div class="mb-4 col-md-6">
-                  <label class="form-label" for="password-confirm">비밀번호 확인</label>
-                  <input class="form-control" type="password" name="password-confirm" id="password-confirm">
-                </div>
-              </div>
-            </form>
-            <button class="btn btn-primary pe-2 mb-4 float-end">비밀번호 변경</button>
-          </div> <!-- text-block -->
         </div> <!-- col -->
       </div> <!-- row -->
     </div> <!-- container-->
   </section>
   <!-- 푸터 -->
   <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+  <script>
+		$(document).ready(() => {
+			$("#updateSubmit").on("click", (e) => {
+				let pass1 = $("#pass1").val();			
+				let pass2 = $("#pass2").val();
+				
+				if(pass1.trim() != pass2.trim()) {
+					alert("비밀번호가 일치하지 않습니다.");
+					
+					$("#pass1").val("");
+					$("#pass2").val("");
+					$("#pass1").focus();
+					
+					return false;
+				}		
+			});
+		});
+	</script>
   <!-- Dropzone.js-->
   <script src="${ path }/resources/vendor/dropzone/dropzone.js"></script>
   <!-- Dropzone Init-->

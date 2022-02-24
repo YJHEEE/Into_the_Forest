@@ -48,6 +48,8 @@
 			<mapping path="/member/**"/>
 			<mapping path="/board/**"/>
 			
+			<exclude-mapping path="/member/login"/>
+			<exclude-mapping path="/member/signup"/>
 			<exclude-mapping path="/member/enroll"/>
 			<exclude-mapping path="/member/idCheck"/>
 			<exclude-mapping path="/board/list"/>

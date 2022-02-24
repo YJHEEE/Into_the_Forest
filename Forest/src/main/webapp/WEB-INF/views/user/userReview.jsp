@@ -20,9 +20,11 @@
         <div class="row">
           <!-- 사이드 -->
           <div class="col-lg-3 me-lg-auto">
-            <div class="card border-0 shadow mb-6 mb-lg-0 sticky-top" style="top: 5rem;">
-              <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block" href="#"><img class="d-block avatar avatar-xxl p-2 mb-2" src="${path }/resources/img/user.png" alt=""></a>
-                <h5>우보</h5>
+           <div class="card border-0 shadow mb-6 mb-lg-0 sticky-top" style="top: 5rem;">
+              <div class="card-header bg-gray-100 mb-2 py-4 border-0 text-center">
+                <a class="d-inline-block" href="${path}/user/user">
+              	  <img class="d-inline-block avatar avatar-xxl p-2 mb-2" src="${path }/resources/img/user.png"></a>
+                <h5>${loginMember.name} 님</h5>
             </div>
             <div class="card-body p-4">
               <div class="d-flex align-items-center mb-3">
@@ -32,7 +34,7 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="mb-0">스탬프 2</p>
+                  <p class="mb-0">스탬프<span style="float: right;">2</span></p>
                 </div>
               </div>
               <hr>
@@ -44,7 +46,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">내정보</p>
+                    <p class="mb-0">내 정보</p>
                   </div>
                 </div>
               </a>
@@ -68,7 +70,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">예약정보</p>
+                    <p class="mb-0">예약 정보</p>
                   </div>
                 </div>
               </a>
@@ -80,7 +82,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">내가쓴글</p>
+                    <p class="mb-0">내가 쓴 글</p>
                   </div>
                 </div>
               </a>

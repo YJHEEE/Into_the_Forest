@@ -20,9 +20,11 @@
         <div class="row">
           <!-- 사이드 -->
           <div class="col-lg-3 me-lg-auto">
-            <div class="card border-0 shadow mb-6 mb-lg-0 sticky-top" style="top: 5rem;">
-              <div class="card-header bg-gray-100 py-4 border-0 text-center"><a class="d-inline-block" href="#"><img class="d-block avatar avatar-xxl p-2 mb-2" src="${path }/resources/img/user.png" alt=""></a>
-                <h5>우보</h5>
+           <div class="card border-0 shadow mb-6 mb-lg-0 sticky-top" style="top: 5rem;">
+              <div class="card-header bg-gray-100 mb-2 py-4 border-0 text-center">
+                <a class="d-inline-block" href="${path}/user/user">
+              	  <img class="d-inline-block avatar avatar-xxl p-2 mb-2" src="${path }/resources/img/user.png"></a>
+                <h5>${loginMember.name} 님</h5>
             </div>
             <div class="card-body p-4">
               <div class="d-flex align-items-center mb-3">
@@ -32,7 +34,7 @@
                   </svg>
                 </div>
                 <div>
-                  <p class="mb-0">스탬프 2</p>
+                  <p class="mb-0">스탬프<span style="float: right;">2</span></p>
                 </div>
               </div>
               <hr>
@@ -44,7 +46,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">내정보</p>
+                    <p class="mb-0">내 정보</p>
                   </div>
                 </div>
               </a>
@@ -68,7 +70,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">예약정보</p>
+                    <p class="mb-0">예약 정보</p>
                   </div>
                 </div>
               </a>
@@ -80,7 +82,7 @@
                     </svg>
                   </div>
                   <div>
-                    <p class="mb-0">내가쓴글</p>
+                    <p class="mb-0">내가 쓴 글</p>
                   </div>
                 </div>
               </a>
@@ -92,41 +94,51 @@
             <div class="text-block">
               <h2 class="hero-heading mb-4">휴양림 예약 내역</h2>
               <h4 class="mb-5">방문 예정</h4> 
-              <div class="row">
-
-                <div class="list-group shadow mb-5 p-0">
-                  <a class="list-group-item list-group-item-action p-4" href="userReservationDetail.jsp">
-                    <div class="row">
-                      <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
-                        <div class="d-flex align-items-center mb-3 p-0">
-                          <h2 class="h4 mb-0">청태산 자연휴양림</h2>
-                        </div>
-                        <span class="badge badge-pill p-2 badge-success-light">2019 / 11 / 11 - 2019 / 11 / 13</span>
-                      </div>
-                      <div class="col-lg-8">
-                        <div class="row">
-                          <div class="col-6 col-md-4 col-lg-4 py-3">
-                            <h6 class="label-heading">결제</h6>
-                            <p class="text-sm fw-bold">159,000</p>
-                            <h6 class="label-heading">휴양림 번호</h6>
-                            <p class="text-sm fw-bold mb-0">02.123.4567</p>
-                          </div>
-                          <div class="col-6 col-md-4 col-lg-4 py-3">
-                            <h6 class="label-heading">예약자</h6>
-                            <p class="text-sm fw-bold">이진</p>
-                            <h6 class="label-heading">예약자 번호</h6>
-                            <p class="text-sm fw-bold mb-0">010.1234.5678</p>
-                          </div>
-                          <div class="col-12 col-lg-4 align-self-center"><span class="text-primary text-sm text-uppercase me-4 me-lg-0"><i class="fa fa-check fa-fw me-2"> </i>결제완료</span><br class="d-none d-lg-block"><span class="text-primary text-sm text-uppercase"><i class="fa fa-check fa-fw me-2"> </i>예약완료</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </a> 
-                </div>
-
-              <!-- <p class="text-muted mb-5">예약된 숙소가 없습니다. 다음 여행을 계획해보세요.</p> --> 
               
+              <div class="row">
+				 <c:if test="${book == null }">
+					<h3>예약된 숙소가 없습니다. 다음 여행을 계획해보세요.</h3>
+                </c:if>
+                <c:if test="${book != null }">
+	                <c:forEach var="book" items="${ book }">
+		                <div class="list-group shadow mb-5 p-0">
+		                  <a class="list-group-item list-group-item-action p-4" href="userReservationDetail.jsp">
+		                    <div class="row">
+		                      <div class="col-lg-4 align-self-center mb-4 mb-lg-0">
+		                        <div class="d-flex align-items-center mb-3 p-0">
+		                          <h2 class="h4 mb-0"><c:out value="${ forest.forest_name }"/></h2>
+		                        </div>
+		                        <p class="text-sm text-muted"><c:out value="${ room.room_name }"/></p>
+		                        <span class="badge badge-pill p-2 badge-success-light"><c:out value="${ book.check_in }"/> - <c:out value="${ book.check_out }"/></span>
+		                      </div>
+		                      <div class="col-lg-8">
+		                        <div class="row">
+		                          <div class="col-6 col-md-4 col-lg-4 py-3">
+		                            <h6 class="label-heading">결제</h6>
+		                            <p class="text-sm fw-bold"><c:out value="${ book.pay }"/></p>
+		                            <h6 class="label-heading">휴양림 번호</h6>
+		                            <p class="text-sm fw-bold mb-0"><c:out value="${ forest.forest_phone }"/></p>
+		                          </div>
+		                          <div class="col-6 col-md-4 col-lg-4 py-3">
+		                            <h6 class="label-heading">예약자</h6>
+		                            <p class="text-sm fw-bold"><c:out value="${ member.name }"/></p>
+		                            <h6 class="label-heading">예약자 전화번호</h6>
+		                            <p class="text-sm fw-bold mb-0"><c:out value="${ member.tell }"/></p>
+		                          </div>
+		                          <div class="col-12 col-lg-4 align-self-center">
+		                            <span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+		                             <i class="fa fa-check fa-fw me-2"> </i>결제완료</span><br class="d-none d-lg-block">
+		                            <span class="text-primary text-sm text-uppercase">
+		                             <i class="fa fa-check fa-fw me-2"> </i>예약완료</span>
+		                          </div>
+		                        </div>
+		                      </div>
+		                    </div>
+		                  </a> 
+		                </div>
+	     		   </c:forEach>
+     		  </c:if>
+              <!-- 방문 완료 (이전 예약 기록) -->
               <p class="mb-6"> <img class="img-fluid" src="${ path }/resources/img/illustration/undraw_trip_dv9f.svg" alt="" style="width: 400px;"></p>    
               <h4 class="mb-5">방문 완료</h4> 
               <div class="row">
