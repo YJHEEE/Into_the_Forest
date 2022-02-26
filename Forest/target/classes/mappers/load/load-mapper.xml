@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="loadMap">
+	<sql id="selectLoadSql">
+		SELECT LOAD_KEY,
+			LOAD_CATOGORY,
+			LOAD_NAME,
+			LOAD_ADDRESS,
+			LOAD_WAYPOINT,
+			LOAD_INTRO,
+			LOAD_DETAIL_INTRO,
+			LOAD_START,
+			LOAD_END,
+			MOUNT_KEY
+		FROM LOAD
+	</sql>
+
+	<resultMap type="Load" id="loadResultMap">
+		<id property="key" column="load_key"/> <!-- 둘레길/자전거길 번호 -->
+		<result property="catogory" column="load_catogory"/> <!-- 카테고리(길 구분) -->
+		<result property="name" column="load_name"/> <!-- 길 이름 -->
+		<result property="address" column="load_address"/> <!-- 주소 -->
+		<result property="waypoint" column="load_waypoint"/> <!-- 경유지 -->
+		<result property="intro" column="load_intro"/> <!-- 소개 -->
+		<result property="introDetail" column="load_detail_intro"/> <!-- 둘레길 거리 -->
+		<result property="start" column="load_start"/> <!-- 구간 시작 -->
+		<result property="end" column="load_end"/> <!-- 구간 도착 -->
+		<result property="mKey" column="mount_key"/> <!-- 산 키(외래키) -->
+	</resultMap>
+
+	<select id="selectAll" resultMap="loadResultMap">
+		<include refid="selectLoadSql"/>
+	</select>
+
+	<!-- 등산로 쿼리 시작 -->
+	<select id="selectLoadFilter" resultMap="loadResultMap" parameterType="map">
+		<include refid="selectLoadSql"/>
+		WHERE LOAD_NAME LIKE '%' || #{name} || '%'
+		AND LOAD_CATOGORY='등산로'
+		
+		<choose>
+			<when test="sort == 'DESC'">ORDER BY LOAD_NAME DESC</when> <!-- '오름차순' 선택 시 -->
+			<otherwise>ORDER BY LOAD_NAME ASC</otherwise> <!-- 기본설정값 또는 '이름순' 선택 시 -->
+		</choose>
+	</select>
+	
+	<select id="selectLoadCount" resultType="int">
+		SELECT COUNT(*) FROM LOAD
+		WHERE LOAD_CATOGORY='등산로'
+	</select>
+	
+	<!-- 등산로 쿼리 끝 -->
+	
+	<!-- 둘레길 쿼리 시작 -->
+	<select id="selectDulleFilter" resultMap="loadResultMap" parameterType="map">
+		<include refid="selectLoadSql"/>
+		WHERE LOAD_NAME LIKE '%' || #{name} || '%'
+		AND LOAD_CATOGORY='둘레길'
+		
+		<if test="min != null and max !=null">
+		 	<![CDATA[AND TO_NUMBER(LOAD_START) >= TO_NUMBER(#{min}) AND TO_NUMBER(#{max}) >= TO_NUMBER(LOAD_START)]]>
+		</if>
+		
+		<choose>
+			<when test="sort == 'DESC'">ORDER BY LOAD_NAME DESC</when> <!-- '오름차순' 선택 시 -->
+			<otherwise>ORDER BY LOAD_NAME ASC</otherwise> <!-- 기본설정값 또는 '이름순' 선택 시 -->
+		</choose>
+	</select>
+	
+	<select id="selectDulleCount" resultType="int">
+		SELECT COUNT(*) FROM LOAD
+		WHERE LOAD_CATOGORY='둘레길'
+	</select>
+	<!-- 둘레길 쿼리 끝 -->	
+
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

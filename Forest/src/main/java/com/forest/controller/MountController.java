@@ -49,8 +49,7 @@ public class MountController {
 
 		PageInfo pageInfo = new PageInfo(page, 10, service.getMountCount(), 10);
 		List<Mount> list = service.findMountFilter(name, min, max, sort, areaArray);
-		
-		System.out.println("list 값 : "+list.get(2).getClass());
+		System.out.println(list.toString());
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("/mount/mount");

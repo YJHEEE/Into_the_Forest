@@ -1,11 +1,14 @@
-package com.forest.member.model.service;
+package com.forest.model.service;
 
 
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.forest.model.vo.Member;
 
+@Service
 public interface MemberService {
 
 	int getMemberCount();
@@ -19,4 +22,7 @@ public interface MemberService {
 	int updateMember(Member member);
 	
 	int deleteMember(String memberId);
+	
+	
 }
+
