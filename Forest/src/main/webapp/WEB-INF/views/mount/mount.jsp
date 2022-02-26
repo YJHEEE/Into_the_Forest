@@ -24,7 +24,7 @@
           <div class="text-block">
             <div class="col-xl-12 col-md-6">
 <!-- 필터 -->
-<form action="${path}/mount/mount" method="GET">
+<form action="${path}/mount/mount" method="POST">
                 <div class="row">
                   <!-- 검색 -->
                   <div class="col-xl-12 col-md-6 mb-4">

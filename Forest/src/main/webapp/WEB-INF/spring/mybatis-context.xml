@@ -38,7 +38,7 @@
 	
 	<!-- DAO를 대처할 Mapper Scanning -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer"
-		p:basePackage="com.kh.mvc.*.model.mapper"	
+		p:basePackage="com.**.mapper"	
 	/>
 	
 	<!-- 트랜잭션 매니저 설정 -->

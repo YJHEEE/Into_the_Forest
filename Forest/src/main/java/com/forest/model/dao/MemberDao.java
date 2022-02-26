@@ -23,6 +23,7 @@ public class MemberDao {
 	}
 	
 	public Member findMemberById(String id) {
+		System.out.println("id : "+id);
 		return session.selectOne("memberMap.selectMember", id);
 	}
 	

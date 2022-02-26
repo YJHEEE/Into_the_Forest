@@ -44,8 +44,7 @@ CREATE TABLE MEMBER (
     PW VARCHAR2(50) ,
     NAME VARCHAR2(20),
     TELL VARCHAR2(30),
-    FIELD VARCHAR2(100),
-    ROLE VARCHAR2(10) DEFAULT 'ROLE_USER'
+    FIELD VARCHAR2(100)
     
 );
 
@@ -57,17 +56,13 @@ INSERT INTO MEMBER (
     PW, 
     NAME, 
     TELL,
-    FIELD,
-    ROLE
+    FIELD
 ) VALUES(
-  
     'admin', 
     '1234', 
     '°ü¸®ÀÚ', 
     '010-1234-4341',
-    NULL,
-    'ROLE_ADMIN'
-    
+    NULL    
 );
 
 COMMIT;

@@ -24,7 +24,12 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 	
-	@RequestMapping(value = "/login", method = {RequestMethod.POST})
+	@GetMapping("/member/login")
+	public String loginPage() {
+		log.info("로그인 페이지 요청");
+		return "member/login";
+	}
+	@PostMapping("/member/login")
 	public ModelAndView login(ModelAndView model, String userId, String userPwd) {
 		log.info("{},{}",userId,userPwd);
 		

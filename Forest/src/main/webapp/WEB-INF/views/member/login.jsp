@@ -16,15 +16,15 @@
 					<div class="mb-4">
 						<img class="img-fluid mb-4" src="${path }/resources/img/logo/logo_name.png" alt="로고" style="max-width: 13rem;">
 					</div>
-					<form class="form-validate" id="loginFrm" action="${path}/login" method="post">
+					<form class="form-validate" id="loginForm" action="${path}/member/login" method="post">
 						<div class="mb-4">
 							<label class="form-label" for="loginUserId">아이디</label> 
-							<input class="form-control" name="loginUserId" id="loginUserId" type="text" placeholder="아이디" autocomplete="off" required
+							<input class="form-control" name="userId" id="loginUserId" type="text" placeholder="아이디" autocomplete="off" required
 								data-msg="Please enter your email">
 						</div>
 						<div class="mb-4">
 							<label class="form-label" for="loginPassword">비밀번호</label> 
-							<input class="form-control" name="loginPassword" id="loginPassword"
+							<input class="form-control" name="userPwd" id="loginPassword"
 								placeholder="비밀번호" type="password" required
 								data-msg="Please enter your password">
 						</div>
@@ -62,54 +62,5 @@
 	</div>
 	<!-- 푸터 -->
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-	<!-- JavaScript files-->
-	<script>
-		// ------------------------------------------------------- //
-		//   Inject SVG Sprite - 
-		//   see more here 
-		//   https://css-tricks.com/ajaxing-svg-sprite/
-		// ------------------------------------------------------ //
-		function injectSvgSprite(path) {
-
-			var ajax = new XMLHttpRequest();
-			ajax.open("GET", path, true);
-			ajax.send();
-			ajax.onload = function(e) {
-				var div = document.createElement("div");
-				div.className = 'd-none';
-				div.innerHTML = ajax.responseText;
-				document.body.insertBefore(div, document.body.childNodes[0]);
-			}
-		}
-		// to avoid CORS issues when viewing using file:// protocol, using the demo URL for the SVG sprite
-		// use your own URL in production, please :)
-		// https://demo.bootstrapious.com/directory/1-0/icons/orion-svg-sprite.svg
-		//- injectSvgSprite('${path}icons/orion-svg-sprite.svg'); 
-		injectSvgSprite('https://demo.bootstrapious.com/directory/1-4/icons/orion-svg-sprite.svg');
-	</script>
-	<!-- jQuery-->
-	<script src="${path }/resources/vendor/jquery/jquery.min.js"></script>
-	<!-- Bootstrap JS bundle - Bootstrap + PopperJS-->
-	<script
-		src="${path }/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<!-- Magnific Popup - Lightbox for the gallery-->
-	<script
-		src="${path }/resources/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-	<!-- Smooth scroll-->
-	<script
-		src="${path }/resources/vendor/smooth-scroll/smooth-scroll.polyfills.min.js"></script>
-	<!-- Bootstrap Select-->
-	<script
-		src="${path }/resources/vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
-	<!-- Object Fit Images - Fallback for browsers that don't support object-fit-->
-	<script src="${path }/resources/vendor/object-fit-images/ofi.min.js"></script>
-	<!-- Swiper Carousel                       -->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.1/js/swiper.min.js"></script>
-	<script>
-        var basePath = ''
-    </script>
-	<!-- Main Theme JS file    -->
-	<script src="${path }/resources/js/theme.js"></script>
 </body>
 </html>

@@ -34,7 +34,7 @@
 	
 	<select id="selectMember" resultMap="memberResultMap" parameterType="string">
 		<include refid="selectMemberSql"/>
-		WHERE ID = #{id}
+		WHERE ID = #{id} 
 	</select>
 	
 	<insert id="insertMember" parameterType="Member" 
