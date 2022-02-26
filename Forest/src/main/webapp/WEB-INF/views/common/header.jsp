@@ -48,7 +48,7 @@
     <nav class="navbar navbar-expand-lg fixed-top shadow navbar-light bg-white">
       <div class="container"> 
         <div class="d-flex align-items-center">
-          <a class="navbar-brand py-1" href="${path }">
+          <a class="navbar-brand py-1" href="${path}/">
             <img src="${path}/resources/img/logo/logo_name.png" alt="Directory logo" class="w-6rem" />
           </a>
         </div>
@@ -60,19 +60,32 @@
         <!--  내브바 Collapse -->
         <div class="collapse navbar-collapse" id="navbarCollapse">
           <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link fs-6" href="${path}/mountain/mountain">산림</a>
+            <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">산림</a>
+              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
+                <a class="dropdown-item" href="${path}/mount/mount">산 정보</a>
+                <a class="dropdown-item" href="${path}/mount/mountTop100">100대 명산</a>
+              </div>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">둘레길/자전거길</a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
-                <a class="dropdown-item" href="${path}/mountain/dulle">둘레길</a>
-                <a class="dropdown-item" href="${path}/mountain/trail">자전거길</a>
+                <a class="dropdown-item" href="${path}/mount/dulle">둘레길</a>
+                <a class="dropdown-item" href="${path}/mount/trail">자전거길</a>
               </div>
             </li>
-            <li class="nav-item">
+            <li class="nav-item dropdown">
           		<a class="nav-link fs-6" href="${path}/forest/forest">휴양림</a>
             </li>
+            <c:if test="${ loginMember.role == 'ROLE_ADMIN' }">
+	            <li class="nav-item dropdown">
+	          		<a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">휴양림</a>
+	              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
+	                <a class="dropdown-item" href="${path}/forest/forest">휴양림</a>
+			            	<a class="dropdown-item" href="${path}/forest/forestManager">휴양림 예약 관리</a>
+	              </div>
+	            </li>
+			</c:if>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">

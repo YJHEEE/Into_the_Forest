@@ -10,14 +10,72 @@ CREATE TABLE Mount (
 	mount_transport	VARCHAR2(4000)
 );
 
+DROP SEQUENCE mount_key;
+CREATE SEQUENCE mount_key;
+
+INSERT INTO Mount (
+    mount_key, 
+    mount_name, 
+    mount_100rs, 
+    mount_area,
+    mount_height, 
+    mount_point, 
+    mount_inf, 
+    mount_transport
+) VALUES(
+    mount_key.NEXTVAL, 
+    '백암산', 
+    '100대 명산 선정이유', 
+    '충청북도', 
+    '1500', 
+    '정상에서 바라본 구름이 절경', 
+    '케이블카 타고 올라오면 편합니다', 
+    '근처 터미널에서 10분 택시 타시면 빠릅니다.'
+);
+
+COMMIT;
+
+SELECT * FROM Mount;
+
+
 DROP TABLE MEMBER CASCADE CONSTRAINTS;
 CREATE TABLE MEMBER (
     ID VARCHAR2(50) PRIMARY KEY,
     PW VARCHAR2(50) ,
     NAME VARCHAR2(20),
     TELL VARCHAR2(30),
-    FIELD VARCHAR2(100)
+    FIELD VARCHAR2(100),
+    ROLE VARCHAR2(10) DEFAULT 'ROLE_USER'
+    
 );
+
+DROP SEQUENCE SEQ_UNO;
+CREATE SEQUENCE SEQ_UNO;
+
+INSERT INTO MEMBER (
+    ID, 
+    PW, 
+    NAME, 
+    TELL,
+    FIELD,
+    ROLE
+) VALUES(
+  
+    'admin', 
+    '1234', 
+    '관리자', 
+    '010-1234-4341',
+    NULL,
+    'ROLE_ADMIN'
+    
+);
+
+COMMIT;
+
+SELECT * FROM MEMBER;
+
+
+
 
 DROP TABLE Stamp_Post CASCADE CONSTRAINTS;
 CREATE TABLE Stamp_Post (

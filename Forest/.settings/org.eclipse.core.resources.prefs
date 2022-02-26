@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/community/communityBoard.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mountain/mountain.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mountain/mountainDetail.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mountain/mountainTop100.jsp=UTF-8
-encoding//src/main/webapp/WEB-INF/views/mountain/trail.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mount/mount.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mount/mountDetail.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mount/mountTop100.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mount/trail.jsp=UTF-8

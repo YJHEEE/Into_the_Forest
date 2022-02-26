@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mountMap">
+	<sql id="selectMountSql">
+		SELECT mount_key,
+			   mount_name,
+			   mount_100rs,
+			   mount_area,
+		  	   mount_height,
+			   mount_point,
+			   mount_inf,
+			   mount_transport
+		FROM MOUNT
+	</sql>
+	
+	<resultMap type="Mount" id="mountResultMap">
+		<id property="key" column="mount_key"/> <!-- 산 번호 -->
+		<result property="name" column="mount_name"/> <!-- 산 이름 -->
+		<result property="rs100" column="mount_100rs"/> <!-- 100대 명산 선정 이유 -->
+		<result property="area" column="mount_area"/> <!-- 소재지 -->
+		<result property="height" column="mount_height"/> <!-- 해발 -->
+		<result property="point" column="mount_point"/> <!-- 산행 Point -->
+		<result property="information" column="mount_inf"/> <!-- 상세정보 -->
+		<result property="transport" column="mount_transport"/> <!-- 교통정보 -->
+	</resultMap>
+	
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM MOUNT
+	</select>
+	
+	<select id="selectAll" resultMap="mountResultMap">
+		<include refid="selectMountSql"/>
+	</select>
+	
+	<select id="selectMount" resultMap="mountResultMap" parameterType="string">
+		<include refid="selectMountSql"/>
+		WHERE MOUNT_NAME =#{name}
+	</select>
+	
+	<select id="selectMountFilter" resultMap="mountResultMap" parameterType="map">
+		<include refid="selectMountSql"/>
+		WHERE MOUNT_NAME LIKE '%' || #{name} || '%'
+		
+ 		<if test="areaArray != null">
+			<foreach collection="areaArray" index="index" item="areaArray" open="AND (1 = 1 AND" separator="OR" close=")">
+				MOUNT_AREA LIKE '%' ||  #{areaArray} || '%'
+			</foreach>
+		</if>
+		
+		<if test="min != null and max !=null">
+		 	<![CDATA[AND MOUNT_HEIGHT >= TO_NUMBER(#{min}) AND TO_NUMBER(#{max}) >= MOUNT_HEIGHT]]>
+		</if>
+		
+		<choose>
+			<when test="sort == 'HEIGHT_DESC'">ORDER BY TO_NUMBER(MOUNT_HEIGHT) DESC</when> <!-- '높이순' 선택 시 -->
+			<when test="sort == 'ONLYBEST'">AND MOUNT_100RS IS NOT NULL</when> <!-- '명산만 보기' 선택 시 -->
+			<otherwise>ORDER BY MOUNT_NAME ASC</otherwise> <!-- 기본설정값 또는 '이름순' 선택 시 -->
+		</choose>
+	</select>	
+	
+	<insert id="insertMount" parameterType="Mount" useGeneratedKeys="true" keyColumn="mount_key" keyProperty="key">
+		INSERT INTO MOUNT(
+			mount_key,
+			mount_name,
+			mount_100rs,
+			mount_area,
+			mount_height,
+			mount_point,
+			mount_inf,
+			mount_transport
+		) VALUES(
+			#{key},
+			#{name},
+			#{rs100},
+			#{area},
+			#{height},
+			#{point},
+			#{information},
+			#{transport}
+		)
+	</insert>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -27,7 +27,7 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" 
 		p:configuration-ref="mybatisConfig"
 		p:mapperLocations="classpath:mappers/**/*.xml"
-		p:typeAliasesPackage="com.kh.mvc.*.model.vo"
+		p:typeAliasesPackage="com.**.vo"
 		p:dataSource-ref="dataSource"
 	/>
 	
