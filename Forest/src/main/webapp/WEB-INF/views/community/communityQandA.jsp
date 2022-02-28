@@ -25,6 +25,7 @@
             <div class="d-flex justify-content-between align-items-center">
               <div class="col-5 float-start align-items-center">
                 <p class="mb-3 mb-md-0 fs-5"><i class="fa fa-clipboard-list me-1"></i>&nbsp총 게시글</p>
+                <c:out value="${fn:length(list)}"/>
               </div>
               <div class="d-flex">
                 <div class="me-2 align-items-center">
