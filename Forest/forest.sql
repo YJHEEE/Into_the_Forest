@@ -34,7 +34,6 @@ INSERT INTO Mount (
 );
 
 COMMIT;
-
 SELECT * FROM Mount;
 
 
@@ -45,38 +44,23 @@ CREATE TABLE MEMBER (
     NAME VARCHAR2(20),
     TELL VARCHAR2(30),
     FIELD VARCHAR2(100)
-    
 );
 
 DROP SEQUENCE SEQ_UNO;
 CREATE SEQUENCE SEQ_UNO;
 
-INSERT INTO MEMBER (
-    ID, 
-    PW, 
-    NAME, 
-    TELL,
-    FIELD
-    
-) VALUES(
-    'admin', 
-    '1234', 
-    '관리자', 
-    '010-1234-4341',
-    NULL    
-);
-
-COMMIT;
+INSERT INTO MEMBER VALUES('admin','1234','관리자','010-1234-4341', NULL);
+insert into member values('1idforest', '1pwforest', '김신청만했어', '010-1111-1111', '');
+insert into member values('2idforest', '2pwforest', '김허가했어', '010-2222-2222', '');
+insert into member values('3idforest', '3pwforest', '김인증못해', '010-3333-3333', '');
 
 SELECT * FROM MEMBER;
-
-
-
+COMMIT;
 
 DROP TABLE Stamp_Post CASCADE CONSTRAINTS;
 CREATE TABLE Stamp_Post (
 	stamp_key	    VARCHAR2(4000) PRIMARY KEY,
-	stmap_title 	VARCHAR2(4000),
+	stamp_title 	VARCHAR2(4000),
 	stamp_content	VARCHAR2(4000),
 	stamp_100name	VARCHAR2(4000),
 	stamp_date	    VARCHAR2(4000),
@@ -89,6 +73,25 @@ CREATE TABLE Stamp_Post (
 	id	            VARCHAR2(4000),
     FOREIGN KEY(ID) REFERENCES MEMBER (ID) ON DELETE CASCADE
 );
+DELETE STAMP_POST;
+
+insert into stamp_post values('1', '스탬프신청합니당', '지리산다녀왔습니다', '지리산', '2021-10-21', 'file1부분', 'file2부분', 'file3부분', 'file4부분', 'file5부분', '1', (select b.id from member b where id like '1idforest'));
+insert into stamp_post values('2', '글제목 스탬프 신청했고 허가받았음', '저는 한라산이용', '한라산', '2021-08-01', 'file1부분', 'file2부분', 'file3부분', 'file4부분', 'file5부분', '2', (select b.id from member b where id like '2idforest'));
+insert into stamp_post values('3', '글제목 가야산다녀옴 근데 스탬프 인증거부당함', '가야산이여', '가야산', '2022-01-30', 'file1부분', 'file2부분', 'file3부분', 'file4부분', 'file5부분', '3', (select b.id from member b where id like '3idforest')) ;
+insert into stamp_post values('4', '허가받음', '북한산다녀옴ㅋ', '북한산', '2022-01-20', 'file1부분', 'file2부분', 'file3부분', 'file4부분', 'file5부분', '2', (select b.id from member b where id like '2idforest'));
+
+insert into stamp_post values('5', '', '', '', '', '', '', '', '', '', '2', '2idforest');
+insert into stamp_post values('6', '', '', '', '', '', '', '', '', '', '2', '2idforest');
+insert into stamp_post values('7', '', '', '', '', '', '', '', '', '', '2', '2idforest');
+insert into stamp_post values('8', '', '', '', '', '', '', '', '', '', '2', '2idforest');
+insert into stamp_post values('9', '', '', '', '', '', '', '', '', '', '2', '1idforest');
+insert into stamp_post values('10', '', '', '', '', '', '', '', '', '', '2', '3idforest');
+insert into stamp_post values('11', '', '', '', '', '', '', '', '', '', '2', '3idforest');
+insert into stamp_post values('12', '', '', '', '', '', '', '', '', '', '1', '2idforest');
+
+SELECT * FROM stamp_post;
+COMMIT;
+
 
 DROP TABLE Load CASCADE CONSTRAINTS;
 CREATE TABLE Load (
@@ -106,31 +109,8 @@ CREATE TABLE Load (
 );
 
 
-INSERT INTO Load (
-    load_key, 
-    load_catogory, 
-    load_name, 
-    load_address,
-    load_waypoint,
-    load_intro,
-    load_detail_intro,
-    load_start,
-    load_end,
-    mount_key
-    
-) VALUES(
-    'dulle_1', 
-    '둘레길', 
-    '인월', 
-    '전라북도',
-    '설산이 절경',
-    '전라북도 남원시 인월면 인월리와 경상남도 함양군 마천면 의탄리를 잇는 20.5km의 지리산둘레길로 약 8시간이 소요됩니다.',
-    '인월금계구간은 지리산둘레길 시범구간 개통지인 지리산북부지역 남원시 산내면 상황마을과 함양군 마천면 창원마을을 있는 ',
-    '인월',
-    '금계',
-    '1'    
-);
-
+INSERT INTO Load VALUES('dulle_1', '둘레길','인월','전라북도','설산이 절경','전라북도 남원시 인월면 인월리와 경상남도 함양군 마천면 의탄리를 잇는 20.5km의 지리산둘레길로 약 8시간이 소요됩니다.',
+    '인월금계구간은 지리산둘레길 시범구간 개통지인 지리산북부지역 남원시 산내면 상황마을과 함양군 마천면 창원마을을 있는 ','인월','금계','1');
 
 SELECT * FROM Load;
 COMMIT;
@@ -208,6 +188,10 @@ CREATE TABLE FOREST(
 DROP SEQUENCE SEQ_FOREST_KEY;
 CREATE SEQUENCE SEQ_FOREST_KEY;
 
+INSERT INTO FOREST values('1', '청태산휴양림', '공유림', '산림청', '경상도과 전라도를 가로지르는', '경상도', '경상남도 하동군', '055-123-4567', '15', '11', '50', '물놀이장,바베큐,회의실','','','');
+SELECT * FROM FOREST;
+COMMIT;
+
 DROP TABLE ROOM CASCADE CONSTRAINTS;  
 CREATE TABLE ROOM(
   ROOM_KEY NUMBER PRIMARY KEY,
@@ -254,3 +238,10 @@ CREATE TABLE FOREST_REVIEW(
   FOREIGN KEY (ID) REFERENCES MEMBER on DELETE SET NULL,
   FOREIGN KEY (ROOM_KEY) REFERENCES ROOM on DELETE SET NULL
 );
+
+
+DESC Stamp_Post;
+
+
+select rownum, x.* from (select id as id, count(stamp_yesno) as count  from stamp_post where to_number(stamp_yesno) = 2 group by id order by count(stamp_yesno) desc) x;
+select stamp_100name AS No1_name from stamp_post where id like id and to_number(stamp_yesno) = 2 and stamp_100name is not null;

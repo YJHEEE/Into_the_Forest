@@ -2,19 +2,15 @@ package com.forest.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.mvc.common.util.PageInfo;
+import com.forest.model.service.StampPostService;
+import com.forest.model.vo.StampNo1;
+import com.forest.model.vo.StampRank;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,15 +18,15 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("community")
 @Controller
 public class CommunityController {
-	
-//	@Autowired
-//	private BoardService service;
+
+	@Autowired
+	StampPostService service;
 
 	@GetMapping("/boardWrite")
 	public void boardWrite() {
 		log.info("게시글 작성 요청 페이지");
 	}
-	
+
 //	@GetMapping("/boardWrite")
 //	public ModelAndView boardWrite(ModelAndView model, HttpServletRequest request,
 ////			@SessionAttribute(name="loginMember", required=false) Member loginMember, 게시판 작성한 회원 정보 가져오기
@@ -74,7 +70,7 @@ public class CommunityController {
 	public String communityBoard() {
 		return "/community/communityBoard";
 	}
-	
+
 //	@GetMapping("/communityBoard")
 //	public ModelAndView communityBoard(ModelAndView model,
 //			@RequestParam(value="page", required=false,defaultValue="1") int page) {
@@ -114,9 +110,14 @@ public class CommunityController {
 		return "/community/communityReviewPost";
 	}
 
-	@GetMapping("/communityStamp")
-	public String communityStamp() {
-		return "/community/communityStamp";
+	@RequestMapping("/communityStamp")
+	public ModelAndView stampPage(ModelAndView model, String id) {
+
+		List<StampRank> list = service.findAllRank();
+
+		model.addObject("list", list);
+		model.setViewName("/community/communityStamp");
+		return model;
 	}
 
 	@GetMapping("/communityStampManager")

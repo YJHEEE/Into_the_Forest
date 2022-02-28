@@ -40,7 +40,7 @@ public class MemberController {
 		log.info("{},{}", userId, userPwd);
 
 		Member loginMember = service.login(userId, userPwd);
-		System.out.println("controller : "+userId+userPwd); 
+//		System.out.println("controller => loginMember : "+ loginMember.toString()); 
 	
 
 		if (loginMember != null) {

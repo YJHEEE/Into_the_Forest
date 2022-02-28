@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="StampPostMap">
+	<sql id="selectStampPostSql">
+		SELECT stamp_key,
+			   stamp_title,
+			   stamp_content,
+			   stamp_100name,
+		  	   stamp_date,
+			   stamp_file1,
+			   stamp_file2,
+			   stamp_file3,
+			   stamp_file4,
+			   stamp_file5,
+			   stamp_yesno,
+			   id
+		FROM Stamp_Post
+	</sql>
+	
+	<resultMap type="StampPost" id="StampPostResultMap">
+		<id property="key" column="stamp_key"/> <!-- 산 번호 -->
+		<result property="title" column="stamp_title"/> <!-- 산 이름 -->
+		<result property="content" column="stamp_content"/> <!-- 100대 명산 선정 이유 -->
+		<result property="name100" column="stamp_100name"/> <!-- 소재지 -->
+		<result property="date" column="stamp_date"/> <!-- 해발 -->
+		<result property="file1" column="stamp_file1"/> <!-- 산행 Point -->
+		<result property="file2" column="stamp_file2"/> <!-- 산행 Point -->
+		<result property="file3" column="stamp_file3"/> <!-- 산행 Point -->
+		<result property="file4" column="stamp_file4"/> <!-- 산행 Point -->
+		<result property="file5" column="stamp_file5"/> <!-- 산행 Point -->
+		<result property="yesno" column="stamp_yesno"/> <!-- 상세정보 -->
+		<result property="id" column="id"/> <!-- 교통정보 -->
+	</resultMap>
+		
+	
+	<resultMap type="StampRank" id="StampPostRankMap">
+		<result property="rownum" column="rownum"/> 
+		<result property="id" column="id"/>
+		<result property="count" column="count"/> 
+	</resultMap>
+	
+	<resultMap type="StampNo1" id="StampPostNo1Map">
+		<result property="No1_list" column="No1_list"/> 
+	</resultMap>
+		
+	<select id="selectAll" resultMap="StampPostResultMap">
+		<include refid="selectStampPostSql"/>
+		order by to_number(stamp_key)
+	</select>
+	
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM STAMP_POST
+	</select>
+
+	<!-- 3. 관리자가 스탬프 인증 게시판에서 글을 조회 할 수 있는 부분 -->
+	<select id="selectAdmin" resultMap="StampPostResultMap">
+		select stamp_key, stamp_title, ID, stamp_100name from stamp_post where to_number(stamp_yesno) = 1 order by stamp_date
+	</select>
+	
+	<!-- 4. 관리자가 스탬프 인증 게시판에서 인증 '허가' 버튼을 눌렀을 때 정보 업데이트 됨 -->
+	<update id="updateAdminAllow" parameterType="map">
+		update stamp_post set stamp_yesno = '2' where id like #{id} and to_number(stamp_key) = to_number(#{key})
+	</update>	
+	
+	<!-- 5. 관리자가 스탬프 인증 게시판에 인증 '거부' 버튼을 눌렀을 때 정보가 업데이트 됨 -->
+	<update id="updateMountUnallow" parameterType="map">
+		update stamp_post set stamp_yesno = '3' where id like #{id} and to_number(stamp_key) = to_number(#{key})
+	</update>
+	
+	<!-- @@@@@@@@ 테스트용 - id랑 key값 입력하기 @@@@@@@@ -->
+	<select id="selectTestKey" resultMap="StampPostResultMap" parameterType="string">
+		select * from stamp_post where id like #{id} and to_number(stamp_key) = to_number(#{key})
+	</select>
+	
+	<!-- 6. 회원이 개인페이지에서 스탬프 페이지를 조회할 때 - 스탬프 보여주는 부분(자바에서 스템프 찍힌것과 안찍힌 것을 어떻게 구분지을지 생각해보기) -->
+	<select id="selectUserStamp" resultMap="StampPostResultMap" parameterType="string">
+		select * from stamp_post where to_number(stamp_yesno) = 2 and id like #{id}
+	</select>
+	
+	<!-- 7. 회원이 개인페이지에서 스탬프 페이지를 조회할 때 - 게시글보여주는 부분(최신순으로 나열) -->
+	<select id="selectUserStampPost" resultMap="StampPostResultMap" parameterType="string">
+		select stamp_title, stamp_yesno from stamp_post where id like #{id} order by stamp_date desc
+	</select>
+	
+	<!-- 8. 명예의 전당에서 스탬프 개수 세는 부분 -->
+	<select id="selectHofStampCount" resultMap="StampPostResultMap" parameterType="string">
+		select * from stamp_post where id like #{id} and to_number(stamp_yesno) = 2
+	</select>
+	
+	<!-- 9. 명예의 전당에서 스탬프 찍힌것만 보여주는 부분(여기는 아예 스탬프 찍힌것만 보여주는 걸로 소스 구현해야함) -->
+	<select id="selectHofStamp" resultMap="StampPostNo1Map" parameterType="string">
+		select stamp_100name from stamp_post where id like #{id} and to_number(stamp_yesno) = 2 and stamp_100name is not null
+	</select>
+	
+	<!-- 10. 명예의 전당에서 프로필사진 보여주는 부분 -->
+	<select id="selectHofUserPicture" resultMap="StampPostResultMap" parameterType="string">
+		select field from member where id like #{id}
+	</select>
+
+	<!-- 11. 명예의 전당에서 전체 순위 -->
+	<select id="selectHofAllRank" resultMap="StampPostRankMap">
+		select rownum, x.* from (select id as id, count(stamp_yesno) as count  from stamp_post where to_number(stamp_yesno) = 2 group by id order by count(stamp_yesno) desc) x
+	</select>
+	
+	<!-- 12. 명에의 전당에서 사용자 id 검색 -->
+	<select id="selectHofUserId" resultMap="StampPostResultMap" parameterType="string">
+		select a.id, count(b.stamp_100name) from member a, stamp_post b where a.id = b.id and b.id like #{id} group by a.id, a.field
+	</select>
+
+</mapper>

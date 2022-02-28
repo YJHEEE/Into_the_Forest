@@ -31,6 +31,8 @@ public class MountController {
 		System.out.println(service.findAll());
 		List<Mount> list = service.findAll();
 		
+		
+		
 		model.addObject("list", list);
 		model.setViewName("/mount/mount");
 
