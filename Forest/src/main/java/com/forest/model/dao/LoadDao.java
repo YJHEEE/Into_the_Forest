@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.forest.model.vo.Load;
+
 @Repository
 public class LoadDao {
 	
@@ -27,7 +28,7 @@ public class LoadDao {
 		map.put("min", min);
 		map.put("max", max);
 		map.put("sort", sort);
-		
+		System.out.println("DAO=> " + map.toString());
 		return session.selectList("loadMap.selectDulleFilter", map);
 	}
 	

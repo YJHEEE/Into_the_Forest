@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="forestMap">
+
+	<sql id="selectForestSql">
+		SELECT FOREST_KEY,
+		FOREST_NAME,
+		FOREST_CATEGORY,
+		FOREST_OPER,
+		FOREST_INFO,
+		FOREST_CITYNAME,
+		FOREST_ADDR,
+		FOREST_PHONE,
+		CHECK_IN,
+		CHECK_OUT,
+		PERSON,
+		AMENITIES,
+		URL,
+		LATITUDE,-*
+		LONGITUDE
+		FROM FOREST
+	</sql>
+
+
+	<resultMap type="com.forest.model.vo.Forest" id="forestResultMap">
+		<id property="forest_key" column="FOREST_KEY"/>
+		<result property="forest_name" column="FOREST_NAME"/>
+		<result property="forest_category" column="FOREST_CATEGORY"/>
+		<result property="forest_oper" column="FOREST_OPER"/>
+		<result property="forest_info" column="FOREST_INFO"/>
+		<result property="forest_cityName" column="FOREST_CITYNAME"/>
+		<result property="forest_addr" column="FOREST_ADDR"/>
+		<result property="forest_phone" column="FOREST_PHONE"/>
+		<result property="Check_in" column="CHECK_IN"/>
+		<result property="Check_out" column="CHECK_OUT"/>
+		<result property="person" column="PERSON"/>
+		<result property="amenities" column="AMENITIES"/>
+		<result property="url" column="URL"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="longitude" column="LONGITUDE"/>
+	</resultMap>
+
+	<select id="selectCount" resultType="int">
+		SELECT COUNT(*) FROM FOREST
+	</select>
+
+	<select id="selectAll" resultMap="forestResultMap">
+		<include refid="selectForestSql"/>
+	</select>
+
+	<select id="searchByFilter" resultMap="forestResultMap"
+		parameterType="map">
+		<include refid="selectForestSql"/>
+		<where>
+			<if test="search != null ">
+				AND FOREST_NAME LIKE '%' || #{search} || '%'
+			</if>
+			<if test="locate != null ">
+				AND FOREST_CITYNAME LIKE '%' || #{locate} || '%'
+			</if>
+			<if test="categoryList !=null">
+				AND FOREST_CATEGORY IN
+				<foreach collection="categoryList" item="item" separator=","
+					open="(" close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+			<if test="amenitiesList !=null">
+				AND AMENITIES IN
+				<foreach collection="amenitiesList" item="item"
+					separator="," open="(" close=")" index="index">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+	</select>
+
+	<select id="searchByNo" resultMap="forestResultMap"
+		parameterType="int">
+		<include refid="selectForestSql"/>
+		WHERE FOREST_KEY = #{forest_key}
+	</select>
+</mapper>

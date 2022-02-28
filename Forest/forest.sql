@@ -57,6 +57,7 @@ INSERT INTO MEMBER (
     NAME, 
     TELL,
     FIELD
+    
 ) VALUES(
     'admin', 
     '1234', 
@@ -103,6 +104,38 @@ CREATE TABLE Load (
 	mount_key	        VARCHAR2(4000),
     FOREIGN KEY (MOUNT_KEY) REFERENCES MOUNT (MOUNT_KEY) ON DELETE SET NULL
 );
+
+
+INSERT INTO Load (
+    load_key, 
+    load_catogory, 
+    load_name, 
+    load_address,
+    load_waypoint,
+    load_intro,
+    load_detail_intro,
+    load_start,
+    load_end,
+    mount_key
+    
+) VALUES(
+    'dulle_1', 
+    '둘레길', 
+    '인월', 
+    '전라북도',
+    '설산이 절경',
+    '전라북도 남원시 인월면 인월리와 경상남도 함양군 마천면 의탄리를 잇는 20.5km의 지리산둘레길로 약 8시간이 소요됩니다.',
+    '인월금계구간은 지리산둘레길 시범구간 개통지인 지리산북부지역 남원시 산내면 상황마을과 함양군 마천면 창원마을을 있는 ',
+    '인월',
+    '금계',
+    '1'    
+);
+
+
+SELECT * FROM Load;
+COMMIT;
+
+
 
 DROP TABLE LoadNMount_Review CASCADE CONSTRAINTS;
 CREATE TABLE LoadNMount_Review (

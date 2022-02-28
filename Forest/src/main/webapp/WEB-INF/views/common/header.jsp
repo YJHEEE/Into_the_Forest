@@ -70,14 +70,14 @@
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">둘레길/자전거길</a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
-                <a class="dropdown-item" href="${path}/mount/dulle">둘레길</a>
-                <a class="dropdown-item" href="${path}/mount/trail">자전거길</a>
+                <a class="dropdown-item" href="${path}/load/dulle">둘레길</a>
+                <a class="dropdown-item" href="${path}/load/trail">자전거길</a>
               </div>
             </li>
             <li class="nav-item dropdown">
           		<a class="nav-link fs-6" href="${path}/forest/forest">휴양림</a>
             </li>
-            <c:if test="${ loginMember.role == 'ROLE_ADMIN' }">
+  <%--           <c:if test="${ loginMember.role == 'ROLE_ADMIN' }">
 	            <li class="nav-item dropdown">
 	          		<a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">휴양림</a>
 	              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
@@ -85,16 +85,16 @@
 			            	<a class="dropdown-item" href="${path}/forest/forestManager">휴양림 예약 관리</a>
 	              </div>
 	            </li>
-			</c:if>
+			</c:if> --%>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle fs-6" id="docsDropdownMenuLink" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
                 <a class="dropdown-item" href="${path}/community/communityBoard">자유게시판</a>
                 <a class="dropdown-item" href="${path}/community/communityReview">방문후기</a>
             	<a class="dropdown-item" href="${path}/community/communityStamp">등산 스탬프 순위</a>
-            	<c:if test="${ loginMember.role == 'ROLE_ADMIN' }">
+            	<%-- <c:if test="${ loginMember.role == 'ROLE_ADMIN' }">
 		            	<a class="dropdown-item" href="${path}/community/communityStampManager">등산 스탬프 관리</a>
-				</c:if>
+				</c:if> --%>
               </div>
             </li>
             <li class="nav-item dropdown">

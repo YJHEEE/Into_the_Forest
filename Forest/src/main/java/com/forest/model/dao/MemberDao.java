@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.forest.model.vo.Member;
+
+
 @Repository
 public class MemberDao {
 
@@ -23,7 +25,6 @@ public class MemberDao {
 	}
 	
 	public Member findMemberById(String id) {
-		System.out.println("id : "+id);
 		return session.selectOne("memberMap.selectMember", id);
 	}
 	

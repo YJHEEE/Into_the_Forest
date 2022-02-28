@@ -27,13 +27,13 @@
 			   <input class="form-control" type="button" name="checkDuplicate1" id="checkDuplicate1" value="중복검사" style="float: right;">
 			</div>
             <div class="mb-4">
-            <label class="form-label" for="password">비밀번호</label>
-              <input class="form-control" name="password" id="password" type="password" placeholder="비밀번호" type="password"
+            <label class="form-label" for="pass">비밀번호</label>
+              <input class="form-control" name="pass" id="pass" type="password" placeholder="비밀번호" type="password"
                 required data-msg="비밀번호를 입력해주세요.">
             </div>
             <div class="mb-4">
-	            <label class="form-label" for="password2">비밀번호 확인</label>
-	            <input class="form-control" name="password2" id="password2" type="password" placeholder="비밀번호 확인"
+	            <label class="form-label" for="pass2">비밀번호 확인</label>
+	            <input class="form-control" name="pass2" id="pass2" type="password" placeholder="비밀번호 확인"
 	              type="password" required data-msg="비밀번호를 입력해주세요.">
             </div>
             <div class="mb-4">
@@ -73,15 +73,15 @@
 	<script>
 		$(document).ready(() => {
 			$("#pass2").blur((event) => {
-				let pass1 = $("#pass1").val();			
+				let pass1 = $("#pass").val();			
 				let pass2 = $(event.target).val();
 				
 				if(pass1.trim() != pass2.trim()) {
 					alert("비밀번호가 일치하지 않습니다.");
 					
-					$("#pass1").val("");
+					$("#pass").val("");
 					$(event.target).val("");
-					$("#pass1").focus();
+					$("#pass").focus();
 				}
 			});
 	    	

@@ -16,7 +16,7 @@
 					<div class="mb-4">
 						<img class="img-fluid mb-4" src="${path }/resources/img/logo/logo_name.png" alt="로고" style="max-width: 13rem;">
 					</div>
-					<form class="form-validate" id="loginForm" action="${path}/member/login" method="post">
+<form class="form-validate" id="loginForm" action="${path}/member/login" method="POST">
 						<div class="mb-4">
 							<label class="form-label" for="loginUserId">아이디</label> 
 							<input class="form-control" name="userId" id="loginUserId" type="text" placeholder="아이디" autocomplete="off" required
@@ -31,7 +31,7 @@
 						<div class="d-grid">
 							<input type="submit" value="로그인" class="btn btn-lg btn-primary">
 						</div>
-					</form>
+</form>
 					<hr class="my-3 hr-text letter-spacing-2" data-content="OR">
 					<div class="d-grid gap-2">
 						<button

@@ -52,6 +52,7 @@
 			<exclude-mapping path="/member/signup"/>
 			<exclude-mapping path="/member/enroll"/>
 			<exclude-mapping path="/member/idCheck"/>
+			
 			<exclude-mapping path="/board/list"/>
 			<exclude-mapping path="/board/view"/>
 			<exclude-mapping path="/board/fileDown"/>

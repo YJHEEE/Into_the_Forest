@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="boardMap">
+
+	<resultMap type="Board" id="boardListResultMap">
+		<id property="no" column="NO" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="category" column="CATEGORY" />
+		<result property="readCount" column="READCOUNT" />
+		<result property="field1" column="FIELD1" />
+		<result property="field2" column="FIELD2" />
+		<result property="field3" column="FIELD3" />
+		<result property="field4" column="FIELD4" />
+		<result property="field5" column="FIELD5" />
+		<result property="id" column="ID" />
+	</resultMap>
+
+	<resultMap type="Reply" id="boardReplyResultMap">
+		<id property="reply_key" column="REPLY_KEY" />
+		<result property="reply_content" column="REPLY_CONTENT" />
+		<result property="reply_date" column="REPLY_DATE" />
+		<result property="no" column="NO" />
+		<result property="id" column="ID" />
+	</resultMap>
+
+	<resultMap type="Board" id="boardDetailResultMap"
+		extends="boardListResultMap">
+		<collection property="replies" javaType="arrayList"
+			resultMap="boardReplyResultMap" columnPrefix="R_" />
+	</resultMap>
+
+	<select id="selectBoardByNo" parameterType="map"
+		resultMap="boardDetailResultMap">
+		SELECT B.NO,
+		B.TITLE,
+		B.CONTENT,
+		B.CATEGORY,
+		M.ID,
+		B.READCOUNT,
+		B.FIELD1,
+		B.FIELD2,
+		B.FIELD3,
+		B.FIELD4,
+		B.FIELD5,
+		R.REPLY_KEY,
+		R.REPLY_DATE,
+		R.REPLY_CONTENT,
+		M2.ID AS R_ID
+		FROM BOARD B
+		JOIN MEMBER M
+		ON(B.ID = M.ID)
+		LEFT OUTER JOIN REPLY R ON(B.NO = R.NO)
+		LEFT OUTER JOIN
+		MEMBER M2 ON(R.ID = M2.ID)
+		WHERE B.NO=#{no}
+	</select>
+
+
+	<select id="boardSearchByFilter" parameterType="map"
+		resultMap="boardListResultMap">
+		SELECT
+		B.NO,
+		B.TITLE,
+		B.CONTENT,
+		B.CATEGORY,
+		B.READCOUNT,
+		B.FIELD1,
+		B.FIELD2,
+		B.FIELD3,
+		B.FIELD4,
+		B.FIELD5,
+		M.ID
+		FROM BOARD B
+		JOIN MEMBER M ON
+		(B.ID = M.ID)
+		<where>
+			<if test="sort == '작성자' ">
+				AND M.ID LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="sort == '제목' ">
+				AND TITLE LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="category != null ">
+				AND B.CATEGORY LIKE #{category}
+			</if>
+		</where>
+	</select>
+
+	<insert id="insertBoard" parameterType="map"
+		useGeneratedKeys="true" keyProperty="no" keyColumn="NO">
+		INSERT INTO BOARD (
+		NO,
+		TITLE,
+		CONTENT,
+		CATEGORY,
+		READCOUNT,
+		FIELD1,
+		FIELD2,
+		FIELD3,
+		FIELD4,
+		FIELD5,
+		id
+		) VALUES (
+		SEQ_BOARD_NO.NEXTVAL,
+		#{title},
+		#{content},
+		#{category},
+		DEFAULT,
+		#{field1},
+		#{field2},
+		#{field3},
+		#{field4},
+		#{field5},
+		#{id}
+		)
+	</insert>
+
+	<insert id="insertReply" parameterType="map">
+		INSERT INTO REPLY
+		VALUES(SEQ_REPLY_KEY.NEXTVAL,
+		#{reply_content}, SYSDATE, #{no},#{id})
+	</insert>
+
+	<update id="updateBoard" parameterType="map">
+		UPDATE BOARD
+		SET
+		TITLE=#{title},
+		CONTENT=#{content}
+		WHERE
+		NO=#{no}
+	</update>
+
+
+	<update id="updateReadCount" parameterType="int">
+		UPDATE BOARD SET READCOUNT = READCOUNT+1 WHERE NO=#{no}
+	</update>
+
+
+
+	<update id="deleteBoard" parameterType="int">
+		DELETE BOARD WHERE
+		NO=#{no}
+	</update>
+
+	<delete id="deleteReply" parameterType="int">
+		DELETE REPLY WHERE
+		REPLY_KEY=#{reply_key}
+	</delete>
+
+	<select id="selectBoardCountByTypeFilters" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*)
+		FROM BOARD
+		<where>
+			<if test="sort != null &amp;&amp; sort == '작성자' ">
+				AND M.ID LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="sort != null &amp;&amp; sort == '제목' ">
+				AND TITLE LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="category != null ">
+				AND B.CATEGORY LIKE #{category}
+			</if>
+		</where>
+	</select>
+	
+
+
+	<select id="getBoardCount" parameterType="map" resultType="int">
+		SELECT COUNT (*)
+		FROM BOARD
+		<where>
+			<if test="sort != null &amp;&amp; sort == '작성자' ">
+				AND M.ID LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="sort != null &amp;&amp; sort == '제목' ">
+				AND TITLE LIKE '%' || #{searchWord} || '%'
+			</if>
+			<if test="category != null ">
+				AND B.CATEGORY LIKE #{category}
+			</if>
+		</where>
+	</select>
+
+
+</mapper>

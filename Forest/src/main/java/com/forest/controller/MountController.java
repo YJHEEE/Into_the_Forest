@@ -25,14 +25,10 @@ public class MountController {
 	@Autowired
 	MountService service;
 
-	@GetMapping("/dulle")
-	public String dulle() {
-		return "/mountain/dulle";
-	}
 
 	@GetMapping("/mount")
 	public ModelAndView mountPage(ModelAndView model) {
-//		System.out.println(service.findAll());
+		System.out.println(service.findAll());
 		List<Mount> list = service.findAll();
 		
 		model.addObject("list", list);
@@ -49,7 +45,7 @@ public class MountController {
 
 		PageInfo pageInfo = new PageInfo(page, 10, service.getMountCount(), 10);
 		List<Mount> list = service.findMountFilter(name, min, max, sort, areaArray);
-		System.out.println(list.toString());
+		System.out.println("controller list : " + service.findMountFilter(name, min, max, sort, areaArray));
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);
 		model.setViewName("/mount/mount");
@@ -67,9 +63,6 @@ public class MountController {
 		return "/mount/mountTop100";
 	}
 
-	@GetMapping("/trail")
-	public String trail() {
-		return "/mount/trail";
-	}
+
 
 }

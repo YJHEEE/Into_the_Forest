@@ -27,6 +27,7 @@ public class MountDao {
 		map.put("sort", sort);
 		map.put("areaArray", areaArray);
 		
+		System.out.println("DAO : "+map.toString());
 		return session.selectList("mountMap.selectMountFilter", map);
 	}
 	

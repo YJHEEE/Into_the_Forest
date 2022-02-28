@@ -4,13 +4,19 @@ package com.forest.model.service;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forest.model.dao.LoadDao;
+import com.forest.model.dao.MountDao;
 import com.forest.model.vo.Load;
+
+
 @Service
 public class LoadService {
-	private LoadDao dao = new LoadDao();
+	
+	@Autowired
+	private LoadDao dao;
 	
 	public List<Load> findAll() {
 		List<Load> list = dao.findAll();
@@ -24,7 +30,7 @@ public class LoadService {
 		if(max.isEmpty()) {
 			max = "100";
 		}
-		System.out.println("name : "+name+" / min : "+min+" / max : "+max+" / sort : "+sort);
+		System.out.println("Service => name : "+name+" / min : "+min+" / max : "+max+" / sort : "+sort);
 		List<Load> load = dao.getDulleFilter(name, min, max, sort);
 		return load;
 	}

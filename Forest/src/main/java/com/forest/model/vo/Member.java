@@ -9,14 +9,10 @@ import lombok.NonNull;
 import lombok.Setter;
 
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Member {
 	
-	private int no;
 	private String id;
 	private String pw;
 	private String name;

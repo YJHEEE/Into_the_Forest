@@ -85,7 +85,7 @@
           </div> <!-- text-block 끝 -->
           <div class="row offcanvas-body" style="overflow: scroll; width: 625px; height: 700px">
             <c:if test="${list == null }">
-            	<h3> 데이터 없음</h3>
+            	<h3 class="p-2 pt-3 text-center">검색 결과가 없습니다.</h3>
             </c:if>
             <c:if test="${list != null }">
 	           <c:forEach var="mount" items="${ list }">

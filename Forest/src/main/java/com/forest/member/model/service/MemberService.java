@@ -1,4 +1,4 @@
-package com.forest.model.service;
+package com.forest.member.model.service;
 
 
 
@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.forest.model.vo.Member;
 
-@Service
 public interface MemberService {
 
 	int getMemberCount();
@@ -23,6 +22,8 @@ public interface MemberService {
 	
 	int deleteMember(String memberId);
 	
+	
+	//--------------------------------------
 	Member login(String id, String pwd);
 
 	int save(Member member);
