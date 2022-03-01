@@ -37,7 +37,7 @@
 											<i class="fa fa-search"></i>
 										</div>
 										<input class="form-control pe-4" type="search" name="name"
-											placeholder="휴양림 이름을 입력해주세요." id="form_search" />
+											placeholder="둘레길 이름을 입력해주세요." id="form_search" />
 									</div>
 								</div>
 								<!-- 높이 -->
@@ -64,7 +64,7 @@
 								<hr class="mt-4">
 								<div class="col-xl-6 col-md-6 mb-0 mt-4">
 									<p class="mb-md-0 fs-5">
-										<strong><c:out value="${fn.length(list)}"></c:out> OO</strong>
+										<strong><c:out value="${cnt}"></c:out></strong>
 										results found
 									</p>
 								</div>
@@ -72,8 +72,8 @@
 									<label class="form-label" for="form_type">Sort by</label> <select
 										class="selectpicker form-control" name="sort" id="form_sort"
 										data-style="btn-selectpicker" style="float: right;">
-										<option value="sortBy_0">이름순</option>
-										<option value="sortBy_1">오름차순</option>
+										<option value="DESC">내림차순</option>
+										<option value="ASC">오름차순</option>
 									</select>
 								</div>
 							</div>
@@ -106,7 +106,7 @@
 											data-bs-target="#leaveReview" aria-expanded="false"
 											aria-controls="leaveReview">리뷰</button>
 										<p class="text-muted">
-											<c:out value="${load.address }"></c:out>
+											거리 : <c:out value="${load.introDetail }"/>km
 										</p>
 
 

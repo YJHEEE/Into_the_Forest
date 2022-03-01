@@ -5,12 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.forest.model.service.StampPostService;
-import com.forest.model.vo.StampNo1;
+import com.forest.model.vo.Mount;
+import com.forest.model.vo.StampPost;
 import com.forest.model.vo.StampRank;
+import com.kh.mvc.common.util.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -111,11 +114,13 @@ public class CommunityController {
 	}
 
 	@RequestMapping("/communityStamp")
-	public ModelAndView stampPage(ModelAndView model, String id) {
+	public ModelAndView stampPage(ModelAndView model,String id) {
 
 		List<StampRank> list = service.findAllRank();
+		List<StampRank> list2 = service.getHofUserId(id);
 
 		model.addObject("list", list);
+		model.addObject("list2", list2);
 		model.setViewName("/community/communityStamp");
 		return model;
 	}

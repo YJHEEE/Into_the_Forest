@@ -33,7 +33,7 @@
                       <div class="label-absolute">
                         <i class="fa fa-search"></i>
                       </div>
-                      <input class="form-control pe-4" type="search" name="name" placeholder="휴양림 이름을 입력해주세요."
+                      <input class="form-control pe-4" type="search" name="name" placeholder="산 이름을 입력해주세요."
                         id="form_search" />
                     </div>
                   </div>
@@ -59,7 +59,7 @@
                       <div class="max"><span id="slider-snap-value-to"></span>km</div>
                     </div>
                     <input type="hidden" name="min" id="slider-snap-input-from" value="0">
-                    <input type="hidden" name="max" id="slider-snap-input-to" value="1000">
+                    <input type="hidden" name="max" id="slider-snap-input-to" value="5000">
                   </div>
                   
                   <div class="mt-2">
@@ -68,15 +68,14 @@
                   <hr class="mt-4">
 				  <div class="col-xl-6 col-md-6 mb-0 mt-4">
 				  	<p class="mb-md-0 fs-5">
-						<strong><c:out value="${fn.length(list)}"></c:out> OO</strong> results found</p>
+						<strong><c:out value="${cnt}"></c:out></strong> results found</p>
 				  </div>
 				  <div class="col-xl-6 col-md-6 mb-0">
                     <label class="form-label" for="form_type">Sort by</label>
                   		<select class="selectpicker form-control" name="sort" id="form_sort" data-style="btn-selectpicker" style="float: right;">
-		                    <option value="sortBy_0">이름순 </option>
-		                    <option value="sortBy_1">높이순 </option>
-		                    <option value="sortBy_2">명산만 보기 </option>
-		                    <option value="sortBy_3">명산 top 100 </option>
+		                    <option value="ASC">이름순 </option>
+		                    <option value="HEIGHT_DESC">높이순 </option>
+		                    <option value="ONLYBEST">명산만 보기 </option>
                   		</select>
                   </div>
                 </div> <!-- row 끝 -->
@@ -95,7 +94,7 @@
 	                <div class="card-img-top overflow-hidden gradient-overlay" style="height: 10rem;"> 
 	                  <img class="img-fluid" src="${ path }/resources/img/top100/강천산2.jpg" alt="Modern, Well-Appointed Room" />
 	                  <!-- 클릭시 해당 산 상세페이지로 넘어가는 곳 a link -->
-	                  <a class="tile-link" href="${path }/mount/mountDetail"></a>
+	                  <a class="tile-link" href="${path }/mount/mountDetail?name=${mount.name}"></a>
 	                  <div class="card-img-overlay-bottom z-index-20">
 	                    <div>
 	                      <h5 style="color:white;"><c:out value="${mount.name}"></c:out></h5>
@@ -135,13 +134,13 @@
 		var snapSlider = document.getElementById('slider-snap')
 	
 		noUiSlider.create(snapSlider, {
-			start : [ 0, 500 ],
+			start : [ 0, 5000],
 			snap : false,
 			connect : true,
 			step : 1,
 			range : {
 				min : 0,
-				max : 500,
+				max : 5000,
 			},
 		})
 		var snapValues = [ document.getElementById('slider-snap-value-from'),

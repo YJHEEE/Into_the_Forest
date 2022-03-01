@@ -46,7 +46,7 @@ public class LoadDao {
 	}
 	
 	public int getLoadCount() {
-		return session.selectOne("loadMap.selectLoadCount");
+		return session.selectOne("loadMap.selectDulleCount");
 	}
 	
 }

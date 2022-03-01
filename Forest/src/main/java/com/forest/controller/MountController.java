@@ -30,10 +30,10 @@ public class MountController {
 	public ModelAndView mountPage(ModelAndView model) {
 		System.out.println(service.findAll());
 		List<Mount> list = service.findAll();
-		
-		
+		int cnt = service.getMountCount();
 		
 		model.addObject("list", list);
+		model.addObject("cnt", cnt);
 		model.setViewName("/mount/mount");
 
 	    return model;
@@ -42,27 +42,35 @@ public class MountController {
 	@PostMapping("/mount")
 	public ModelAndView mountData(ModelAndView model, String name, String min, String max, String sort,
 			String[] areaArray) {
-		
-		int page = 1;
-
-		PageInfo pageInfo = new PageInfo(page, 10, service.getMountCount(), 10);
 		List<Mount> list = service.findMountFilter(name, min, max, sort, areaArray);
+		int cnt = list.size();
 		System.out.println("controller list : " + service.findMountFilter(name, min, max, sort, areaArray));
+		System.out.println("controller count : " + service.getMountCount());
+		
 		model.addObject("list", list);
-		model.addObject("pageInfo", pageInfo);
+		model.addObject("cnt", cnt);
 		model.setViewName("/mount/mount");
 
 		return model;
 	}
-
+	
 	@GetMapping("/mountDetail")
-	public String mountainDetail() {
-		return "/mount/mountDetail";
+	public ModelAndView mountainDetail(ModelAndView model, String name) {
+		List<Mount> list = service.findMountDetail(name);
+		System.out.println("detail : " + service.findMountDetail(name));
+		model.addObject("list", list);
+		model.setViewName("/mount/mountDetail");
+		
+		return model;
 	}
-
+	
 	@GetMapping("/mountTop100")
-	public String mountainTop() {
-		return "/mount/mountTop100";
+	public ModelAndView mountainTop(ModelAndView model) {
+		List<Mount> list = service.findTop100();
+		
+		model.addObject("list", list);
+		model.setViewName("/mount/mountTop100");
+		return model;
 	}
 
 

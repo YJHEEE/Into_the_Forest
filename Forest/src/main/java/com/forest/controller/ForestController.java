@@ -28,7 +28,7 @@ public class ForestController {
 
 	@GetMapping("/forest")
 	public ModelAndView forestPage(ModelAndView model) {
-		System.out.println(service.selectAll());
+//		System.out.println(service.selectAll());
 		List<Forest> list = service.selectAll();
 
 		model.addObject("list", list);
@@ -40,9 +40,11 @@ public class ForestController {
 	@PostMapping("/forest")
 	public ModelAndView forestData(ModelAndView model, @RequestParam List<String> param) {
 		int page = 1;
+		System.out.println("필터 : " + param.toString());
 
 		PageInfo pageInfo = new PageInfo(page, 10, service.selectCount(), 10);
 		List<Forest> list = service.selectByFilter(param);
+		System.out.println("postController : " + list.toString());
 
 		model.addObject("list", list);
 		model.addObject("pageInfo", pageInfo);

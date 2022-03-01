@@ -29,12 +29,17 @@ public class MountService {
 		return list;
 	}
 	
+	public List<Mount> findTop100() {
+		List<Mount> list = dao.findTop100();
+		return list;
+	}
+	
 	public List<Mount> findMountFilter(String name, String min, String max, String sort, String[] areaArray){
 		if(min.isEmpty()) {
 			min = "0";
 		}
 		if(max.isEmpty()) {
-			max = "10000";
+			max = "5000";
 		}
 		System.out.println("service 입력 => name : "+name+" / min : "+min+" / max : "+max+" / sort : "+sort+" / areaArray : "+Arrays.toString(areaArray));
 		List<Mount> mount2 = dao.getMountFilter( name, min, max, sort, areaArray);
@@ -42,6 +47,10 @@ public class MountService {
 		return mount2;
 	}
 
-	
-	
+	public List<Mount> findMountDetail(String name) {
+		List<Mount> mount = dao.getMountDetail(name);
+		System.out.println("service 출력 => " + dao.getMountDetail(name));
+		return mount;
+	}
+
 }

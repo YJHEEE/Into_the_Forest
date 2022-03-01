@@ -21,7 +21,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-7 col-xl-6 px-4 ps-xl-4 pe-xl-4">
-          <h1 class="text-serif mb-4">휴양림 검색 페이지</h1>
+          <h1 class="text-serif mb-4">Forest Search</h1>
           <hr class="my-4" />
           <div class="">
             <div class="col-xl-12 col-md-6 mb-4">
@@ -33,13 +33,13 @@
                     <label class="form-label" for="form_search">검색</label>
                     <div class="input-label-absolute input-label-absolute-right">
                       <div class="label-absolute"> <i class="fa fa-search"></i></div>
-                      <input class="form-control pe-4" type="text" name="searchValue" placeholder="휴양림 이름을 입력해주세요." id="form_search" />
+                      <input class="form-control pe-4" type="text" name="search" placeholder="휴양림 이름을 입력해주세요." id="form_search" />
                     </div>
                   </div>
                   <!-- 필터 드롭박스1 -->
                   <div class="col-xl-6 col-md-6 mb-4">
                     <label class="form-label" for="form_type">지역선택</label>
-                    <select class="selectpicker form-control" name="location" id="location" multiple data-style="btn-selectpicker">
+                    <select class="selectpicker form-control" name="locate" id="form_type" multiple data-style="btn-selectpicker">
                       <option value="type_0">전국</option>
                       <option value="type_1">강원도</option>
                       <option value="type_2">경기도</option>
@@ -56,19 +56,19 @@
                       <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="public" name="forest_category" id="cuisine_0"/>
+                            <input class="form-check-input" type="checkbox" value="public" name="item" id="cuisine_0"/>
                             <label class="form-check-label" for="cuisine_0">공립</label>
                           </div>
                         </li>
                         <li class="list-inline-item">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="national" name="forest_category" id="cuisine_1"/>
+                            <input class="form-check-input" type="checkbox" value="national" name="item" id="cuisine_1"/>
                             <label class="form-check-label" for="cuisine_1">국립</label>
                           </div>
                         </li>
                         <li class="list-inline-item">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="private" name="forest_category" id="cuisine_2"/>
+                            <input class="form-check-input" type="checkbox" value="private" name="item" id="cuisine_2"/>
                             <label class="form-check-label" for="cuisine_2">사립</label>
                           </div>
                         </li>
@@ -80,54 +80,55 @@
                       <ul class="list-inline mb-0">
                         <li class="list-inline-item">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="meeting" name="amenities" id="cuisine_3"/>
+                            <input class="form-check-input" type="checkbox" value="meeting" name="item2" id="cuisine_3"/>
                             <label class="form-check-label" for="cuisine_3">회의실</label>
                           </div>
                         </li>
+                        
                         <li class="list-inline-item">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="pool" name="amenities" id="cuisine_4"/>
+                            <input class="form-check-input" type="checkbox" value="pool" name="item2" id="cuisine_4"/>
                             <label class="form-check-label" for="cuisine_4">물놀이장</label>
                           </div>
                         </li>
                         <li class="list-inline-item">
                           <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="bbq" name="amenities" id="cuisine_5"/>
+                            <input class="form-check-input" type="checkbox" value="bbq" name="item2" id="cuisine_5"/>
                             <label class="form-check-label" for="cuisine_5">바베큐</label>
                           </div>
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div class="col-6 mt-3 mb-3">
+                  <div class="mt-2">
                     <button class="btn btn-primary" type="submit"><i class="fas fa-filter me-1"></i>Filter & Search</button>
                   </div>
+                  <hr class="mt-4">
+				  <div class="col-xl-6 col-md-6 mb-0 mt-4">
+				  	<p class="mb-md-0 fs-5">
+						<strong><c:out value="${fn.length(list)}"></c:out> OO</strong> results found</p>
+				  </div>
+<!-- 				  <div class="col-xl-6 col-md-6 mb-0">
+                    <label class="form-label" for="form_type">Sort by</label>
+                  		<select class="selectpicker form-control" name="sort" id="form_sort" data-style="btn-selectpicker" style="float: right;">
+		                    <option value="sortBy_0">이름순 </option>
+		                    <option value="sortBy_1">높이순 </option>
+		                    <option value="sortBy_2">명산만 보기 </option>
+		                    <option value="sortBy_3">명산 top 100 </option>
+                  		</select>
+                  </div> -->
                 </div>
               </form>
-            </div>
-            <!-- 검색 결과-->
-            <hr class="my-4" />
-            <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
-              <div class="me-3">
-                <p class="mb-3 mb-md-0">검색 결과<strong> <c:out value="${forest.size}"></c:out></strong></p>
-              </div>
-              <div>
-                <label class="form-label me-2" for="forest_sort">Sort By</label>
-                <select class="selectpicker" name="forest_sort" id="forest_sort" data-style="btn-selectpicker" >
-                  <option value="sortBy_0">이름순</option>
-                  <option value="sortBy_1">인기순</option>
-                </select>
-              </div>
             </div>
           </div>
           
 <!-- 휴양림 목록1 -->
           <div class="pt-5" style="overflow: auto; width: 620px; height: 600px">
-          <c:if test="${forest == null }">
+          <c:if test="${list == null }">
           	<h3 class="p-2 pt-3 text-center">검색 결과가 없습니다.</h3>
           </c:if>
-          <c:if test="${forest != null }">
-          	<c:forEach var="book" items="${ forest }">
+          <c:if test="${list != null }">
+          	<c:forEach var="forest" items="${ list }">
 	            <div class="mb-5 px-1 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
 	              <div class="p-4 pb-2 card h-100 border-0 shadow">
 	                <div class="d-flex">
@@ -140,7 +141,7 @@
 	                    <table class="text-sm">
 	                      <tr>
 	                        <td style="width: 100px">이용시간</td>
-	                        <td>[입/퇴실 시간] <c:out value="${ forest.check_in }"/> ~ <c:out value="${ forest.check_out }"/></td>
+	                        <td>[입/퇴실 시간] <c:out value="${ forest.check_in }"/> : 00 ~ <c:out value="${ forest.check_out }"/> : 00</td>
 	                      </tr>
 	                      <tr>
 	                        <td style="width: 100px">인원</td>
@@ -179,11 +180,10 @@
            </c:forEach>
           </c:if>
          </div>
-<!-- 휴양림 목록1 끝 -->
-
+		<!-- 휴양림 목록1 끝 -->
         </div>
- <!-- 왼쪽 검색 페이지 끝 -->
- <!--  지도 -->
+<!-- 왼쪽 검색 페이지 끝 -->
+ 	<!--  지도 -->
         <div class="col-lg-5 col-xl-6 px-lg-3">
           <div class="map-wrapper-450 h-100" id="detailSideMap"></div>
         </div>

@@ -113,11 +113,13 @@
 <section class="container py-5 ">
 	<table class="table text-gray-700 table-striped table-hover">
 		<div class="col-xl-5 mb-4" style="float: right;">
-			<div class="input-group">
-				<input class="form-control" type="text"
-					placeholder="사용자 ID를 입력해주세요." id="form_search">
-				<button class="btn btn-primary" style="float: right;" type="submit">검색</button>
-			</div>
+			<form action="${path}/community/communityStamp" method="POST">
+				<div class="input-group">
+					<input class="form-control" type="text" name="id"
+						placeholder="사용자 ID를 입력해주세요." id="form_search">
+					<button class="btn btn-primary" style="float: right;" type="submit">검색</button>
+				</div>
+			</form>
 		</div>
 		<tr>
 			<th class="py-4 text-center align-middle">순위</th>
@@ -126,7 +128,7 @@
 		</tr>
 		<c:if test="${list != null }">
 			<c:forEach var="StampRank" items="${list }">
-				<c:if test="${StampRank.rownum > 5 }">
+				<c:if test="${StampRank.rownum > 4 }">
 					<tr>
 						<td class="py-4 text-center align-middle">
 							<c:out value="${StampRank.rownum}"></c:out> 위</td>
@@ -136,6 +138,18 @@
 							<c:out value="${StampRank.count}"></c:out> 개</td>
 					</tr>
 				</c:if>
+			</c:forEach>
+		</c:if>
+		<c:if test="${list != null && list2 != null }">
+			<c:forEach var="StampRank" items="${list2 }">
+				<tr>
+					<td class="py-4 text-center align-middle"><c:out
+							value="${StampRank.rownum}"></c:out> 위</td>
+					<td class="py-4 text-center align-middle"><c:out
+							value="${StampRank.id}"></c:out> 님</td>
+					<td class="py-4 text-center align-middle"><c:out
+							value="${StampRank.count}"></c:out> 개</td>
+				</tr>
 			</c:forEach>
 		</c:if>
 	</table>

@@ -60,7 +60,7 @@
 		AND LOAD_CATOGORY='둘레길'
 		
 		<if test="min != null and max !=null">
-		 	<![CDATA[AND TO_NUMBER(LOAD_START) >= TO_NUMBER(#{min}) AND TO_NUMBER(#{max}) >= TO_NUMBER(LOAD_START)]]>
+		 	<![CDATA[AND TO_NUMBER(load_detail_intro) >= TO_NUMBER(#{min}) AND TO_NUMBER(#{max}) >= TO_NUMBER(load_detail_intro)]]>
 		</if>
 		
 		<choose>

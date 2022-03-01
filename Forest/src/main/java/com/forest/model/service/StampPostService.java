@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.forest.model.dao.StampPostDao;
-import com.forest.model.vo.StampNo1;
 import com.forest.model.vo.StampPost;
 import com.forest.model.vo.StampRank;
 
@@ -65,9 +64,9 @@ public class StampPostService {
 		return list;
 	}
 
-	public List<StampNo1> getHofStamp(String id) {
+	public List<StampPost> getHofStamp(String id) {
 		System.out.println("servie : " + id);
-		List<StampNo1> list = dao.getHofStamp(id);
+		List<StampPost> list = dao.getHofStamp(id);
 		return list;
 	}
 
@@ -81,8 +80,10 @@ public class StampPostService {
 		return list;
 	}
 
-	public List<StampPost> getHofUserId(String id) {
-		List<StampPost> list = dao.getHofUserId(id);
+	public List<StampRank> getHofUserId(String id) {
+		System.out.println("service : " +id);
+		List<StampRank> list = dao.getHofUserId(id);
+		System.out.println("service : " +list.toString());
 		return list;
 	}
 }

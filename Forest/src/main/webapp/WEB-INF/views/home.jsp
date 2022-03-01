@@ -19,25 +19,25 @@
   <!-- 메인 -->
     <div class="container">
       <div class="search-bar rounded p-3 p-lg-4 position-relative mt-n5 z-index-20">
-        <form action="#">
+        <form action="${path}/mount/mount?sort=ASC&min=0.00" method="POST">
           <div class="row">
             <div class="col-lg-4 d-flex align-items-center form-group">
-              <input class="form-control border-0 shadow-0" type="search" name="search" placeholder="산이름을 입력하세요">
+              <input class="form-control border-0 shadow-0" type="search" name="name" placeholder="산이름을 입력하세요">
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-center form-group">
               <div class="input-label-absolute input-label-absolute-right w-100">
                 <label class="label-absolute" for="location"><i class="fa fa-crosshairs"></i>
                   <div class="sr-only">City</div>
                 </label>
-                <input class="form-control border-0 shadow-0" type="text" name="location" placeholder="지역" id="location">
+                <input class="form-control border-0 shadow-0" type="text" name="areaArray" placeholder="지역" id="location">
               </div>
             </div>
             <div class="col-md-6 col-lg-3 d-flex align-items-center form-group no-divider">
-              <select class="selectpicker" title="산높이" data-style="btn-form-control">
-                <option value="small">499m 이하</option>
-                <option value="medium">500m ~ 999m </option>
-                <option value="large">1000m ~ 1499m </option>
-                <option value="x-large">1500m 이상</option>
+              <select class="selectpicker" title="산높이" data-style="btn-form-control" name="max">
+                <option value="499.00">499m 이하</option>
+                <option value="999.00">500m ~ 999m </option>
+                <option value="1499.00">1000m ~ 1499m </option>
+                <option value="5000.00">1500m 이상</option>
               </select>
             </div>
             <div class="col-lg-2 form-group mb-0">

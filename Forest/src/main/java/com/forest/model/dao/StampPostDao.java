@@ -8,7 +8,6 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.forest.model.vo.StampNo1;
 import com.forest.model.vo.StampPost;
 import com.forest.model.vo.StampRank;
 @Repository
@@ -74,7 +73,7 @@ public class StampPostDao {
 	}
 	
 	//9��
-		public List<StampNo1> getHofStamp(String id){
+		public List<StampPost> getHofStamp(String id){
 			Map<String, String> map = new HashMap<>();
 			map.put("id", id);
 			return session.selectList("StampPostNo1Map.selectHofStamp", map);
@@ -93,7 +92,7 @@ public class StampPostDao {
 		}
 		
 	//12��
-		public List<StampPost> getHofUserId(String id){
-			return session.selectList("StampPostMap.selectHofUserId");
+		public List<StampRank> getHofUserId(String id){
+			return session.selectList("StampPostMap.selectHofUserId",id);
 		}
 }

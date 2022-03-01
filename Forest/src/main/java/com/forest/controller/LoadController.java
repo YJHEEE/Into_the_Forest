@@ -28,8 +28,10 @@ public class LoadController {
 	public ModelAndView dullePage(ModelAndView model) {
 //		System.out.println(service.findAll());
 		List<Load> list = service.findAll();
+		int cnt = service.getLoadCount();
 		
 		model.addObject("list", list);
+		model.addObject("cnt", cnt);
 		model.setViewName("/load/dulle");
 
 		return model;
@@ -37,17 +39,15 @@ public class LoadController {
 	
 	@PostMapping("/dulle")
 	public ModelAndView dulleData(ModelAndView model, String name, String min, String max, String sort) {
-		
-		int page = 1;
 
 		System.out.println("controller1 => name : "+name+" / min : "+min+" / max : "+max+" / sort : "+sort);
-		PageInfo pageInfo = new PageInfo(page, 10, service.getDulleCount(), 10);
 		List<Load> list = service.findDulleFilter(name, min, max, sort);
+		int cnt = service.getLoadCount();
 		
 		System.out.println("controller2 :"+list.toString());
 		
 		model.addObject("list", list);
-		model.addObject("pageInfo", pageInfo);
+		model.addObject("cnt", cnt);
 		model.setViewName("/load/dulle");
 		System.out.println("controller3 : "+model.toString());
 

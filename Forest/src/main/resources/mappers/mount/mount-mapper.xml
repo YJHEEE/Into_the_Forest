@@ -34,7 +34,13 @@
 		<include refid="selectMountSql"/>
 	</select>
 	
-	<select id="selectMount" resultMap="mountResultMap" parameterType="string">
+	<!-- top100 페이지 출력 -->
+	<select id="selectTop100" resultMap="mountResultMap">
+		<include refid="selectMountSql"/>
+		WHERE MOUNT_100RS IS NOT NULL
+	</select>
+	
+	<select id="selectMountDetail" resultMap="mountResultMap" parameterType="string">
 		<include refid="selectMountSql"/>
 		WHERE MOUNT_NAME =#{name}
 	</select>
@@ -50,7 +56,7 @@
 		</if>
 		
 		<if test="min != null and max !=null">
-		 	<![CDATA[AND MOUNT_HEIGHT >= TO_NUMBER(#{min}) AND TO_NUMBER(#{max}) >= MOUNT_HEIGHT]]>
+		 	<![CDATA[AND TO_NUMBER(MOUNT_HEIGHT) >= TO_NUMBER(#{min}) AND TO_NUMBER(#{max}) >= TO_NUMBER(MOUNT_HEIGHT)]]>
 		</if>
 		
 		<choose>

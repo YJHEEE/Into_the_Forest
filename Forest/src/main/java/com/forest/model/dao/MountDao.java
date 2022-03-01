@@ -38,4 +38,13 @@ public class MountDao {
 	public List<Mount> findAll() {
 		return session.selectList("mountMap.selectAll");
 	}
+
+	public List<Mount> getMountDetail(String name) {
+		return session.selectList("mountMap.selectMountDetail", name);
+	}
+
+	public List<Mount> findTop100() {
+		return session.selectList("mountMap.selectTop100");
+	}
+	
 }

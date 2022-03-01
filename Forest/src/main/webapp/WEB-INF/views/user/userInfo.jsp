@@ -108,7 +108,7 @@
                 </div>
                 <div class="mb-4 col-md-6">
                   <label class="form-label" for="phone">번호</label>
-                  <input class="form-control" type="text" name="phone" id="phone" value="${loginMember.phone}">
+                  <input class="form-control" type="text" name="phone" id="phone" value="${loginMember.tell}">
                 </div>
                 <div class="mb-4 col-md-6">
                   <label class="form-label" for="pass1">새로운 비밀번호</label>

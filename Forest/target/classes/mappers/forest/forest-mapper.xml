@@ -50,8 +50,7 @@
 		<include refid="selectForestSql"/>
 	</select>
 
-	<select id="searchByFilter" resultMap="forestResultMap"
-		parameterType="map">
+	<select id="searchByFilter" resultMap="forestResultMap" parameterType="map">
 		<include refid="selectForestSql"/>
 		<where>
 			<if test="search != null ">
@@ -69,9 +68,9 @@
 			</if>
 			<if test="amenitiesList !=null">
 				AND AMENITIES IN
-				<foreach collection="amenitiesList" item="item"
-					separator="," open="(" close=")" index="index">
-					#{item}
+				<foreach collection="amenitiesList" item="item2" separator="," 
+					open="(" close=")" index="index">
+					#{item2}
 				</foreach>
 			</if>
 		</where>

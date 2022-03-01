@@ -54,6 +54,15 @@ insert into member values('1idforest', '1pwforest', '김신청만했어', '010-1111-11
 insert into member values('2idforest', '2pwforest', '김허가했어', '010-2222-2222', '');
 insert into member values('3idforest', '3pwforest', '김인증못해', '010-3333-3333', '');
 
+
+insert into member values('4idforest', '4pwforest', '김신청만했어', '010-1111-1111', '');
+insert into member values('5idforest', '5pwforest', '김허가했어', '010-2222-2222', '');
+insert into member values('6idforest', '6pwforest', '김인증못해', '010-3333-3333', '');
+insert into member values('7idforest', '7pwforest', '김신청만했어', '010-1111-1111', '');
+insert into member values('8idforest', '8pwforest', '김허가했어', '010-2222-2222', '');
+insert into member values('9idforest', '9pwforest', '김인증못해', '010-3333-3333', '');
+
+
 SELECT * FROM MEMBER;
 COMMIT;
 
@@ -87,7 +96,14 @@ insert into stamp_post values('8', '', '', '', '', '', '', '', '', '', '2', '2id
 insert into stamp_post values('9', '', '', '', '', '', '', '', '', '', '2', '1idforest');
 insert into stamp_post values('10', '', '', '', '', '', '', '', '', '', '2', '3idforest');
 insert into stamp_post values('11', '', '', '', '', '', '', '', '', '', '2', '3idforest');
-insert into stamp_post values('12', '', '', '', '', '', '', '', '', '', '1', '2idforest');
+insert into stamp_post values('12', '', '', '', '', '', '', '', '', '', '1', '4idforest');
+insert into stamp_post values('13', '', '', '', '', '', '', '', '', '', '2', '5idforest');
+insert into stamp_post values('14', '', '', '', '', '', '', '', '', '', '2', '6idforest');
+insert into stamp_post values('15', '', '', '', '', '', '', '', '', '', '2', '7idforest');
+insert into stamp_post values('16', '', '', '', '', '', '', '', '', '', '2', '8idforest');
+insert into stamp_post values('17', '', '', '', '', '', '', '', '', '', '2', '8idforest');
+insert into stamp_post values('18', '', '', '', '', '', '', '', '', '', '2', '9idforest');
+
 
 SELECT * FROM stamp_post;
 COMMIT;
@@ -110,7 +126,7 @@ CREATE TABLE Load (
 
 
 INSERT INTO Load VALUES('dulle_1', '둘레길','인월','전라북도','설산이 절경','전라북도 남원시 인월면 인월리와 경상남도 함양군 마천면 의탄리를 잇는 20.5km의 지리산둘레길로 약 8시간이 소요됩니다.',
-    '인월금계구간은 지리산둘레길 시범구간 개통지인 지리산북부지역 남원시 산내면 상황마을과 함양군 마천면 창원마을을 있는 ','인월','금계','1');
+    '30','인월','금계','1');
 
 SELECT * FROM Load;
 COMMIT;
@@ -243,5 +259,43 @@ CREATE TABLE FOREST_REVIEW(
 DESC Stamp_Post;
 
 
+
 select rownum, x.* from (select id as id, count(stamp_yesno) as count  from stamp_post where to_number(stamp_yesno) = 2 group by id order by count(stamp_yesno) desc) x;
-select stamp_100name AS No1_name from stamp_post where id like id and to_number(stamp_yesno) = 2 and stamp_100name is not null;
+select stamp_100name AS No1_list from stamp_post where id like id and to_number(stamp_yesno) = 2 and stamp_100name is not null;
+select a.id, count(b.stamp_100name) as count from member a, stamp_post b where a.id = b.id and b.id like '1idforest'  group by a.id, a.field;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT INTO MEMBER(ID,PW,NAME) VALUES ('abc','123', '이동혁');
+INSERT INTO MEMBER(ID,PW,NAME) VALUES ('qwe','123', '이동수');
+INSERT INTO MEMBER(ID,PW,NAME) VALUES ('asd','123', '이동팔');
+
+INSERT INTO loadnmount_review VALUES ('9','7', '3', '여기 등산로1 너무 좋아요~', 'qwe');
+INSERT INTO loadnmount_review VALUES ('10','6', '2', '여기 등산로2 너무 좋아요~', 'qwe');
+INSERT INTO loadnmount_review VALUES ('11','8', '3', '여기 등산로3 너무 좋아요~', 'qwe');
+
+INSERT INTO loadnmount_review VALUES ('1','7', '3', '여기 등산로1 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('2','6', '2', '여기 등산로2 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('3','8', '3', '여기 등산로3 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('4','9', '4', '여기 둘레길1 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('5','1', '3', '여기 둘레길2 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('6','2', '1', '여기 둘레길3 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('7','3', '5', '여기 둘레길4 너무 좋아요~', 'abc');
+INSERT INTO loadnmount_review VALUES ('8','4', '5', '여기 둘레길5 너무 좋아요~', 'abc');
